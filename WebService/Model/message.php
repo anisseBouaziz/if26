@@ -2,10 +2,10 @@
 class Message
 {
 	public $id;
-	public $creator;
-	public $description;
+	public $contact;
+	public $message;
 	public $date;
-	public $guests[];
+	public $user;
 
 	public $sent = false;
 
