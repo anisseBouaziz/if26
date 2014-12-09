@@ -37,6 +37,11 @@
 			<locationURI>PARENT-5-PROJECT_LOC/wamp/www/messenger/README.md</locationURI>
 		</link>
 		<link>
+			<name>addContact.php</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/wamp/www/messenger/addContact.php</locationURI>
+		</link>
+		<link>
 			<name>config.php</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/wamp/www/messenger/config.php</locationURI>
