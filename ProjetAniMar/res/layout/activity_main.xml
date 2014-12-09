@@ -8,9 +8,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.UTT.if26animar.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <fragment android:name="com.UTT.if26animar.ConnexionFragment"
+              android:id="@+id/fragmentConnexion"
+              android:layout_weight="1"
+              android:layout_width="350dp"
+              android:layout_height="match_parent" 
+    
+    />
+    
+      <fragment android:name="com.UTT.if26animar.InscriptionFragment"
+              android:id="@+id/inscriptionFragment"
+              android:layout_weight="1"
+              android:layout_width="350dp"
+              android:layout_height="match_parent" 
+    
+    />
+    
+    
+    
+    
 
 </RelativeLayout>
