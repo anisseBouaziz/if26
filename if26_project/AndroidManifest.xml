@@ -26,15 +26,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.ContactActivity"
+            android:name=".activity.ContactActivity"
             android:label="Contact list" >
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.ConversationActivity"
-            android:label="Conversation" 
-           >
+            android:name=".activity.ConversationActivity"
+            android:label="Conversation" >
+        </activity>
+        <activity
+            android:name="fr.utt.if26.activity.InscriptionActivity"
+            android:label="@string/title_activity_inscription" >
         </activity>
     </application>
- 
 
 </manifest>

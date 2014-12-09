@@ -14,5 +14,6 @@
     <string name="title_activity_contact">ContactActivity</string>
     <string name="title_activity_contact_conversation">ContactConversationActivity</string>
     <string name="title_activity_conversation">ConversationActivity</string>
+    <string name="title_activity_inscription">InscriptionActivity</string>
 
 </resources>
