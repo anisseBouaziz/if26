@@ -1,4 +1,4 @@
-package fr.utt.if26.service;
+package fr.utt.if26.service.webService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

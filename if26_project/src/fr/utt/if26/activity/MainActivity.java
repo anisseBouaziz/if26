@@ -21,11 +21,11 @@ import fr.utt.if26.R;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ContactParser;
-import fr.utt.if26.service.IConnectionService;
-import fr.utt.if26.service.IRetrieveContactsService;
-import fr.utt.if26.service.WebService;
-import fr.utt.if26.service.WebServiceConnection;
-import fr.utt.if26.service.WebServiceContacts;
+import fr.utt.if26.service.webService.IConnectionService;
+import fr.utt.if26.service.webService.IRetrieveContactsService;
+import fr.utt.if26.service.webService.WebService;
+import fr.utt.if26.service.webService.WebServiceConnection;
+import fr.utt.if26.service.webService.WebServiceContacts;
 
 public class MainActivity extends Activity implements
 		IRetrieveContactsService, IConnectionService {

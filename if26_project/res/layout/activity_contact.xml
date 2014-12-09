@@ -1,13 +1,10 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-              
-        <ListView
-            android:id="@android:id/list"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-        </ListView>
- </LinearLayout> 
+        <ListView android:id="@android:id/list" android:layout_width="match_parent" android:layout_height="428dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_below="@+id/addContact" android:layout_weight="1.63"></ListView>
+        <Button android:id="@+id/addContact" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_weight="1.56" android:text="Add new contact"/>
+        <Button android:id="@+id/deleteContact" android:layout_width="wrap_content" android:layout_height="30dp" android:layout_alignBottom="@+id/addContact" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/addContact" android:text="Delete contact"/>
+ </RelativeLayout> 
 

@@ -15,9 +15,9 @@ import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.Message;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ConversationParser;
-import fr.utt.if26.service.IRetrieveMessageListService;
-import fr.utt.if26.service.WebService;
-import fr.utt.if26.service.WebServiceMessageList;
+import fr.utt.if26.service.webService.IRetrieveMessageListService;
+import fr.utt.if26.service.webService.WebService;
+import fr.utt.if26.service.webService.WebServiceMessageList;
 
 public class ConversationActivity extends Activity implements
 		IRetrieveMessageListService {
@@ -76,7 +76,7 @@ public class ConversationActivity extends Activity implements
 	/**
 	 * Display conversation 
 	 */
-	private void displayConversation(List<Message> listMessagesToDisplay) {
+	public void displayConversation(List<Message> listMessagesToDisplay) {
 		String conversationToDisplay = "";
 		for (Message message : listMessagesToDisplay) {
 			conversationToDisplay=conversationToDisplay+"<b>"+message.getState()
