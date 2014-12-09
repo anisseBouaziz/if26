@@ -15,5 +15,6 @@
     <string name="title_activity_contact_conversation">ContactConversationActivity</string>
     <string name="title_activity_conversation">ConversationActivity</string>
     <string name="title_activity_inscription">InscriptionActivity</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
 
 </resources>

@@ -34,8 +34,16 @@
             android:label="Conversation" >
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.InscriptionActivity"
+            android:name=".activity.InscriptionActivity"
             android:label="@string/title_activity_inscription" >
+        </activity>
+        <activity
+            android:name=".activity.InscriptionActivity"
+            android:label="@string/title_activity_inscription" >
+        </activity>
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main_activity2" >
         </activity>
     </application>
 
