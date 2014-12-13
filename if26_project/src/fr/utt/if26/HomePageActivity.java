@@ -1,8 +1,11 @@
 package fr.utt.if26;
 
+import fr.utt.if26.activity.ContactListActivity;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 
 public class HomePageActivity extends Activity {
@@ -15,15 +18,16 @@ public class HomePageActivity extends Activity {
 		TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
         tabHost.setup();
      
-        TabSpec spec1=tabHost.newTabSpec("TAB 1");
+        TabSpec spec1=tabHost.newTabSpec("inbox");
         spec1.setContent(R.id.tab1);
-        spec1.setIndicator("TAB 1");
+        spec1.setIndicator("Inbox");
      
      
-        TabSpec spec2=tabHost.newTabSpec("TAB 2");
-        spec2.setIndicator("TAB 2");
-        spec2.setContent(R.id.tab2);
-     
+        TabSpec spec2=tabHost.newTabSpec("contact");
+        spec2.setIndicator("Contacts");
+        Intent intent = new Intent(this,ContactListActivity.class);
+        intent.putExtra("user", this.getIntent().getSerializableExtra("user"));
+		spec2.setContent(intent);
      
         
         tabHost.addTab(spec1);

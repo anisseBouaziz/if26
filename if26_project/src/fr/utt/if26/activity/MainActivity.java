@@ -57,8 +57,10 @@ public class MainActivity extends Activity implements
 			@Override
 			public void onClick(View v) {
 				webService = new WebServiceConnection(currentActivity);
-				String email_string = email.getText().toString();
-				String password_string = password.getText().toString();
+//				String email_string = email.getText().toString();
+//				String password_string = password.getText().toString();
+				String email_string="test1@test.fr";
+				String password_string="test";
 				String urlRequest = SERVICE_URL + "login.php?email="
 						+ email_string + "&password=" + password_string;
 				webService.execute(urlRequest);
@@ -77,17 +79,6 @@ public class MainActivity extends Activity implements
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 	/**
 	 * A placeholder fragment containing a simple view.
