@@ -1,6 +1,9 @@
 package fr.utt.if26.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -18,6 +21,7 @@ public class User implements Serializable {
 	}
 
 	public void setContactList(List<Contact> contactList) {
+		Collections.sort(contactList,Collections.reverseOrder());
 		this.contactList = contactList;
 	}
 
@@ -30,6 +34,7 @@ public class User implements Serializable {
 		for (int i = 0; i < contactList.size(); i++) {
 			list[i] = contactList.get(i).getCompleteName();
 		}
+		Arrays.sort(list);
 		return list;
 	}
 
@@ -44,6 +49,21 @@ public class User implements Serializable {
 			}
 		}
 		return contactToReturn;
+	}
+	
+	/**
+	 * Return a map of the messages history.
+	 * Each key is the string pseudo of the contact, and the value is the date of 
+	 * the last message
+	 */
+	public List<String[]> getHistoryDescription() {
+		List<String[]> history = new LinkedList<String[]>();
+		for (int i = 0; i < contactList.size(); i++) {
+			history.add(new String[] { contactList.get(i).getFirstName(), 
+						contactList.get(i).getMessage().getStringDate()
+						+":"+contactList.get(i).getMessage().getMessage()});
+		}
+		return history;
 	}
 
 }

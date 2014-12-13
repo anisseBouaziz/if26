@@ -3,13 +3,17 @@ package fr.utt.if26.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import fr.utt.if26.R;
-import fr.utt.if26.activity.ConversationActivity;
+import fr.utt.if26.R.id;
+import fr.utt.if26.activity.ConversationActivityX;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 
@@ -17,20 +21,32 @@ import fr.utt.if26.model.User;
  * Activity responsible to display the contact list of the connected user
  *
  */
-public class ContactListFragment extends ListFragment {
+public class ContactListFragment extends Fragment {
 
 	private User user;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		user = (User) getActivity().getIntent().getSerializableExtra("user");
 
+		user = (User) getActivity().getIntent().getSerializableExtra("user");
+		   
+		ListView listView = (ListView) getActivity().findViewById(R.id.listView1);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1,
 				user.getStringContactList());
-		setListAdapter(adapter);
+		listView.setAdapter(adapter);
+		
+		
+	}
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
+		
+		return view;
 	}
 
 
@@ -46,18 +62,18 @@ public class ContactListFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * When the user click on a specific contact then we show him all the conversation he has with this contact
-	 */
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		String completeName = (String) l.getItemAtPosition(position);
-		Contact contactWithConversationToDisplay = user
-				.getContactFromCompleteName(completeName);
-		Intent intent = new Intent(getActivity(), ConversationActivity.class);
-		intent.putExtra("contact", contactWithConversationToDisplay);
-		intent.putExtra("user", user);
-		startActivity(intent);
-	}
+//	/**
+//	 * When the user click on a specific contact then we show him all the conversation he has with this contact
+//	 */
+//	@Override
+//	public void onListItemClick(ListView l, View v, int position, long id) {
+//		super.onListItemClick(l, v, position, id);
+//		String completeName = (String) l.getItemAtPosition(position);
+//		Contact contactWithConversationToDisplay = user
+//				.getContactFromCompleteName(completeName);
+//		Intent intent = new Intent(getActivity(), ConversationActivityX.class);
+//		intent.putExtra("contact", contactWithConversationToDisplay);
+//		intent.putExtra("user", user);
+//		startActivity(intent);
+//	}
 }

@@ -17,5 +17,6 @@
     <string name="title_activity_home_page">HomePageActivity</string>
     <string name="title_activity_add_contact">AddContact</string>
     <string name="title_activity_connection">ConnectionActivity</string>
+    <string name="title_activity_conversation_activity2">ConversationActivity2</string>
 
 </resources>

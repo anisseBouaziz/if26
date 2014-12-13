@@ -19,7 +19,7 @@ import fr.utt.if26.service.web.IRetrieveMessageListService;
 import fr.utt.if26.service.web.WebService;
 import fr.utt.if26.service.web.WebServiceMessageList;
 
-public class ConversationActivity extends Activity implements
+public class ConversationActivityX extends Activity implements
 		IRetrieveMessageListService {
 
 	private static final String SERVICE_URL = "http://train.sandbox.eutech-ssii.com/messenger/";
@@ -31,7 +31,7 @@ public class ConversationActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_conversation);
+//		setContentView(R.layout.activity_conversation);
 
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
@@ -80,7 +80,7 @@ public class ConversationActivity extends Activity implements
 		String conversationToDisplay = "";
 		for (Message message : listMessagesToDisplay) {
 			conversationToDisplay=conversationToDisplay+"<b>"+message.getState()
-					+" the "+message.getDate()+":</b><br>"+message.getMessage()+"<br><br>";		
+					+" the "+message.getStringDate()+":</b><br>"+message.getMessage()+"<br><br>";		
 		}
 //		TextView conversationView = (TextView) this
 //				.findViewById(R.id.conversation);

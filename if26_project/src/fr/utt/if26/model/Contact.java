@@ -3,7 +3,7 @@ package fr.utt.if26.model;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Contact implements Serializable {
+public class Contact implements Serializable, Comparable<Contact> {
 
 	private int id;
 	private String firstName;
@@ -11,8 +11,6 @@ public class Contact implements Serializable {
 	private String email;
 	private Message lastMessage;
 	private String completeName;
-	private HashMap<Contact, Message> messagesHistory;
-
 	private static final long serialVersionUID = 1L;
 
 	public Contact(int id, String firstName, String lastName, String email,
@@ -47,6 +45,15 @@ public class Contact implements Serializable {
 
 	public String getCompleteName() {
 		return completeName;
+	}
+
+	@Override
+	public int compareTo(Contact another) {
+		return lastMessage.getStringDate().compareTo(another.getLastMessage().getStringDate());
+	}
+
+	public Message getLastMessage() {
+		return lastMessage;
 	}
 
 }

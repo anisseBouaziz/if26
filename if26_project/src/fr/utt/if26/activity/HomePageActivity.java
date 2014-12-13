@@ -19,7 +19,7 @@ public class HomePageActivity extends FragmentActivity {
         FragmentTabHost tabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        tabHost.addTab(tabHost.newTabSpec("inobx").setIndicator("Inbox"),
+        tabHost.addTab(tabHost.newTabSpec("inbox").setIndicator("Inbox"),
         		MessageListFragment.class, null);
         tabHost.addTab(tabHost.newTabSpec("contacts").setIndicator("Contacts"),
         		ContactListFragment.class, null);
