@@ -1,6 +1,7 @@
 package fr.utt.if26.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Contact implements Serializable {
 
@@ -10,6 +11,7 @@ public class Contact implements Serializable {
 	private String email;
 	private Message lastMessage;
 	private String completeName;
+	private HashMap<Contact, Message> messagesHistory;
 
 	private static final long serialVersionUID = 1L;
 

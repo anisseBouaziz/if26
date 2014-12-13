@@ -4,23 +4,27 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import fr.utt.if26.R;
+import fr.utt.if26.fragment.ContactListFragment;
+import fr.utt.if26.fragment.MessageListFragment;
+import fr.utt.if26.fragment.NotificationsFragment;
 
 public class HomePageActivity extends FragmentActivity {
 
-	private FragmentTabHost mTabHost;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
-        mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+        FragmentTabHost tabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
+        tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("inobx").setIndicator("Inbox"),
-        		ContactListActivity.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("contacts").setIndicator("Contacts"),
-        		ContactListActivity.class, null);
+        tabHost.addTab(tabHost.newTabSpec("inobx").setIndicator("Inbox"),
+        		MessageListFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("contacts").setIndicator("Contacts"),
+        		ContactListFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("notifications").setIndicator("Notifications"),
+        		NotificationsFragment.class, null);
       
 	}
 
