@@ -1,0 +1,14 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame" >
+    <TextView android:id="@+id/errorMessage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="54dp" android:text="Email or password incorrect" android:textAppearance="?android:attr/textAppearanceMedium"/>
+    <Button android:id="@+id/connection" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:text="Connection"/>
+    <EditText android:id="@+id/email" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_above="@+id/password" android:layout_alignLeft="@+id/password" android:layout_marginBottom="20dp" android:ems="10" android:inputType="textEmailAddress">
+        <requestFocus />
+    </EditText>
+    <EditText android:id="@+id/password" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_above="@+id/connection" android:layout_centerHorizontal="true" android:layout_marginBottom="18dp" android:ems="10" android:inputType="textPassword"/>
+</RelativeLayout>
