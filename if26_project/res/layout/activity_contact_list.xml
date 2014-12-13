@@ -1,13 +1,32 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+         >
               
         <ListView
             android:id="@android:id/list"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="386dp" >
+
         </ListView>
- </LinearLayout> 
+
+        <Button
+            android:id="@+id/button_add_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@android:id/list"
+            android:text="Add contact" />
+
+        <Button
+            android:id="@+id/button_delete_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@android:id/list"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/button_add_contact"
+            android:text="Delete contact" />
+
+ </RelativeLayout> 
 
