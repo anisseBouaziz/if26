@@ -19,7 +19,7 @@ import fr.utt.if26.service.web.IRetrieveMessageListService;
 import fr.utt.if26.service.web.WebService;
 import fr.utt.if26.service.web.WebServiceMessageList;
 
-public class ConversationActivityX extends Activity implements
+public class ConversationActivity extends Activity implements
 		IRetrieveMessageListService {
 
 	private static final String SERVICE_URL = "http://train.sandbox.eutech-ssii.com/messenger/";

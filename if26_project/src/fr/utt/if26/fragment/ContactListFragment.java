@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import fr.utt.if26.R;
 import fr.utt.if26.R.id;
-import fr.utt.if26.activity.ConversationActivityX;
+import fr.utt.if26.activity.ConversationActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 
