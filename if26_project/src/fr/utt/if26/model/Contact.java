@@ -1,7 +1,6 @@
 package fr.utt.if26.model;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class Contact implements Serializable, Comparable<Contact> {
 
