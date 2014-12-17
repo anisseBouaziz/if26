@@ -53,6 +53,10 @@
             android:name=".HomePageActivity"
             android:label="@string/title_activity_home_page" >
         </activity>
+        <activity
+            android:name=".ConversationActivity2"
+            android:label="@string/title_activity_conversation_activity2" >
+        </activity>
     </application>
 
 </manifest>

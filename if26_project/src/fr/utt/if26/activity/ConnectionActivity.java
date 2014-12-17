@@ -8,31 +8,20 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ConnectionActivity extends Activity implements  IConnectionActivity{
+public class ConnectionActivity extends Activity{
 
 	private static final String SERVICE_URL = "http://192.168.56.1/messenger/";
 	private EditText email;
 	private EditText password;
 	private TextView errorMessage;
 	private WebService webService;
-	private IConnectionActivity currentActivity;
+	private ConnectionActivity currentActivity;
 	private User user;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_connection);
-
-	}
-
-	@Override
-	public void displayHomePage(User user) {
-		
-	}
-
-	@Override
-	public void displayErrorMessage(String ErrorMessage) {
-		
 	}
 
 	

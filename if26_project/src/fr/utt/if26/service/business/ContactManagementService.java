@@ -4,9 +4,10 @@ import org.json.JSONObject;
 
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
+import fr.utt.if26.service.web.IRetrieveContactsService;
 import fr.utt.if26.service.web.IRetrieveMessageListService;
 
-public class ContactManagementService implements IRetrieveMessageListService {
+public class ContactManagementService implements IRetrieveContactsService {
 
 	private Object caller;
 
@@ -23,7 +24,7 @@ public class ContactManagementService implements IRetrieveMessageListService {
 	}
 
 	@Override
-	public void retrieveMessageList(JSONObject result) {
+	public void retrieveContacts(JSONObject result) {
 		
 	}
 }

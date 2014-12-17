@@ -1,10 +1,8 @@
 package fr.utt.if26.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import fr.utt.if26.R;
-import fr.utt.if26.R.id;
-import fr.utt.if26.activity.ConversationActivity;
-import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 
 /**
