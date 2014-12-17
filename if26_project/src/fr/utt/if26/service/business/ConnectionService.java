@@ -2,9 +2,19 @@ package fr.utt.if26.service.business;
 
 import org.json.JSONObject;
 
+import android.app.Activity;
+import fr.utt.if26.model.User;
 import fr.utt.if26.service.web.IConnectionService;
 
 public class ConnectionService implements IConnectionService {
+	
+	private Activity callerActivity;
+
+	public ConnectionService(Activity callerActivity) {
+		super();
+		this.callerActivity = callerActivity;
+	}
+
 
 	public void retrieveUser(String email, String password){
 //		String email_string="test1@test.fr";
@@ -17,6 +27,11 @@ public class ConnectionService implements IConnectionService {
 	
 	@Override
 	public void instanciateUser(JSONObject result) {
+		
+	}
+
+
+	public void initializeUserInformations(User user) {
 		
 	}
 
