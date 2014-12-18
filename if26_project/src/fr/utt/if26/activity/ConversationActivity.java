@@ -8,11 +8,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import fr.utt.if26.R;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.Message;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ConversationParser;
+import fr.utt.if26.service.business.ConversationService;
 import fr.utt.if26.service.web.IRetrieveMessageListService;
 
 public class ConversationActivity extends Activity implements
@@ -30,7 +35,8 @@ public class ConversationActivity extends Activity implements
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
-		
+		ConversationService conversationService=new ConversationService(this);
+		conversationService.getConversationWithContact(contactWithConversationToDisplay, user);
 
 	}
 
@@ -68,10 +74,20 @@ public class ConversationActivity extends Activity implements
 	 */
 	public void displayConversation(List<Message> listMessagesToDisplay) {
 		String conversationToDisplay = "";
+		int i=0;
 		for (Message message : listMessagesToDisplay) {
-			conversationToDisplay = conversationToDisplay + "<b>"
+			conversationToDisplay = "<b>"
 					+ message.getState() + " the " + message.getStringDate()
 					+ ":</b><br>" + message.getStringMessage() + "<br><br>";
+			
+			View linearLayout =  findViewById(R.id.messageLayout);
+
+	        TextView messageView = new TextView(this);
+	        messageView.setText(conversationToDisplay);
+	        messageView.setId(i++);
+	        messageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+
+	        ((LinearLayout) linearLayout).addView(messageView);
 		}
 		// TextView conversationView = (TextView) this
 		// .findViewById(R.id.conversation);

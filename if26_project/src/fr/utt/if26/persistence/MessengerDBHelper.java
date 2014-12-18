@@ -182,4 +182,9 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 		return isContactFound;
 	}
 
+	public List<Message> getMessagesWithContact(Contact contact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

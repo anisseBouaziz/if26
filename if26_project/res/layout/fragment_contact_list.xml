@@ -1,34 +1,44 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:android1="http://schemas.android.com/apk/res/android">
+
+    <ListView
+        android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         >
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android1:layout_above="@+id/buttonAddContact"
+        android1:fitsSystemWindows="false" >
 
-        <Button
-            android:id="@+id/button_add_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="Add contact" />
+    </ListView>
 
-        <Button
-            android:id="@+id/button_delete_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/button_add_contact"
-            android:text="Delete contact" />
+    <Button
+        android1:id="@+id/buttonFriendRequest"
+        style="?android:attr/buttonStyleSmall"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentRight="true"
+        android1:layout_below="@+id/listView1"
+        android1:text="Friend requests" />
 
-        <ListView
-            android:id="@+id/listView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button_add_contact"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
+    <Button
+        android1:id="@+id/buttonAddContact"
+        style="?android:attr/buttonStyleSmall"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentBottom="true"
+        android1:layout_alignParentLeft="true"
+        android1:text="Add new contact" />
 
-        </ListView>
+    <Button
+        android1:id="@+id/buttonDeleteContact"
+        style="?android:attr/buttonStyleSmall"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_below="@+id/listView1"
+        android1:layout_toLeftOf="@+id/buttonFriendRequest"
+        android1:layout_toRightOf="@+id/buttonAddContact"
+        android1:text="Delete contact" />
 
- </RelativeLayout> 
-
+</RelativeLayout>
