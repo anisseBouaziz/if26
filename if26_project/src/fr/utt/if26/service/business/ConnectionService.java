@@ -26,11 +26,10 @@ public class ConnectionService implements IConnectionService,
 
 	private Activity currentActivity;
 	private User user;
-	private static final String SERVICE_URL = "http://train.sandbox.eutech-ssii.com/messenger/"; //$NON-NLS-1$
+	private static final String SERVICE_URL = "http://192.168.56.1/messenger/"; //$NON-NLS-1$
 	private MessengerDBHelper sqlHelper;
 
 	public ConnectionService(Activity currentActivity) {
-		super();
 		this.currentActivity = currentActivity;
 		sqlHelper = new MessengerDBHelper(
 				currentActivity.getApplicationContext());
@@ -48,9 +47,9 @@ public class ConnectionService implements IConnectionService,
 	/**
 	 * Verify if the pseudo and the password are correct
 	 */
-	public void connectUser(String pseudo, String password) {
+	public void connectUser(String email, String password) {
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
-			String urlRequest = SERVICE_URL + "login.php?email=" + pseudo
+			String urlRequest = SERVICE_URL + "login.php?email=" + email
 					+ "&password=" + password;
 			WebService webService = new WebServiceConnection(this);
 			webService.execute(urlRequest);
@@ -88,15 +87,19 @@ public class ConnectionService implements IConnectionService,
 	 * After getting the token, retrieve all informations about the user (contacts ...)
 	 */
 	public void initializeUserInformations() {
-		WebService webService = new WebServiceContacts(this);
-		String urlRequest = SERVICE_URL
-				+ "contacts.php?token=" + user.getToken(); //$NON-NLS-1$
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
-			webService.execute(urlRequest);
+			retrieveContactsFromServer();
 		} else { // If offline mode then get info from the local database
 			user.setContactList(sqlHelper.retrieveContactsInDB());
 			goToHomePageActivity();
 		}
+	}
+
+	private void retrieveContactsFromServer() {
+		WebService webService = new WebServiceContacts(this);
+		String urlRequest = SERVICE_URL
+				+ "contacts.php?token=" + user.getToken(); //$NON-NLS-1$
+		webService.execute(urlRequest);
 	}
 
 	/**

@@ -6,42 +6,31 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import fr.utt.if26.R;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.Message;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ConversationParser;
 import fr.utt.if26.service.web.IRetrieveMessageListService;
-import fr.utt.if26.service.web.WebService;
-import fr.utt.if26.service.web.WebServiceMessageList;
 
 public class ConversationActivity extends Activity implements
 		IRetrieveMessageListService {
 
-	private static final String SERVICE_URL = "http://train.sandbox.eutech-ssii.com/messenger/";
 
 	private Contact contactWithConversationToDisplay;
 	private User user;
-	private WebService webService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_conversation);
+		 setContentView(R.layout.activity_conversation);
 
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
-		webService = new WebServiceMessageList(this);
-		String urlRequest = SERVICE_URL + "messages.php?token="
-				+ user.getToken() + "&contact="
-				+ contactWithConversationToDisplay.getId();
-
-		webService.execute(urlRequest);
+		
 
 	}
 
@@ -69,21 +58,23 @@ public class ConversationActivity extends Activity implements
 	 */
 	@Override
 	public void retrieveMessageList(JSONObject jsonMessageList) {
-		List<Message> listMessagesToDisplay = ConversationParser.jsonToMessageList(jsonMessageList);
+		List<Message> listMessagesToDisplay = ConversationParser
+				.jsonToMessageList(jsonMessageList);
 		displayConversation(listMessagesToDisplay);
 	}
 
 	/**
-	 * Display conversation 
+	 * Display conversation
 	 */
-	private void displayConversation(List<Message> listMessagesToDisplay) {
+	public void displayConversation(List<Message> listMessagesToDisplay) {
 		String conversationToDisplay = "";
 		for (Message message : listMessagesToDisplay) {
-			conversationToDisplay=conversationToDisplay+"<b>"+message.getState()
-					+" the "+message.getStringDate()+":</b><br>"+message.getMessage()+"<br><br>";		
+			conversationToDisplay = conversationToDisplay + "<b>"
+					+ message.getState() + " the " + message.getStringDate()
+					+ ":</b><br>" + message.getStringMessage() + "<br><br>";
 		}
-//		TextView conversationView = (TextView) this
-//				.findViewById(R.id.conversation);
-//		conversationView.setText(Html.fromHtml(conversationToDisplay));
+		// TextView conversationView = (TextView) this
+		// .findViewById(R.id.conversation);
+		// conversationView.setText(Html.fromHtml(conversationToDisplay));
 	}
 }

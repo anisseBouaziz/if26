@@ -22,20 +22,23 @@ public class ContactParser {
 			JSONArray jsonArray = jsonContactList.getJSONArray("contacts");
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonContact = (JSONObject) jsonArray.get(i);
-
-				String stringMessage = jsonContact.getJSONObject("message")
-						.getString("message");
-				String date = jsonContact.getJSONObject("message").getString(
-						"date");
-				boolean sent = jsonContact.getJSONObject("message").getBoolean(
-						"sent");
-				Message message = new Message(stringMessage, date, sent);
+				Message message=null;
+				if(!jsonContact.isNull("message")){
+					String stringMessage = jsonContact.getJSONObject("message")
+							.getString("message");
+					String date = jsonContact.getJSONObject("message").getString(
+							"date");
+					boolean sent = jsonContact.getJSONObject("message").getBoolean(
+							"sent");
+					message = new Message(stringMessage, date, sent);
+				}
+				
 
 				int contactId = (Integer) jsonContact.get("id");
-				String firstName = jsonContact.getJSONObject("contact")
-						.getString("first_name");
+				String pseudo = jsonContact.getJSONObject("contact")
+						.getString("pseudo");
 			
-				Contact contact = new Contact(contactId, firstName, message);
+				Contact contact = new Contact(contactId, pseudo, message);
 
 				listContact.add(contact);
 			}

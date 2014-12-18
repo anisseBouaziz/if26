@@ -1,5 +1,8 @@
 package fr.utt.if26.util;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -30,5 +33,6 @@ public class InternetConnectionVerificator {
 		}
 		return false;
 	}
+	
 
 }

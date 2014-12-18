@@ -64,7 +64,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 		}
 
 	}
-	
+
 	public List<Contact> retrieveContactsInDB() {
 		List<Contact> contactList = new ArrayList<Contact>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -72,20 +72,21 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 				+ MessengerContract.ContactTable.TABLE_NAME;
 
 		Cursor c = db.rawQuery(selectQuery, null);
-		c.moveToFirst();
-		do{
-			String pseudo= c
-					.getString(c
-							.getColumnIndex(MessengerContract.ContactTable.COLUMN_NAME_PSEUDO));
-			int id = c
-					.getInt(c
-							.getColumnIndex(MessengerContract.COLUMN_NAME_ID));
-			
-			Message message=getLastMessageForContact(id);
-			Contact contact = new Contact(id, pseudo, message);
-			contactList.add(contact);
-		}while(c.moveToNext());
-			
+		boolean hasFoundContact=c.moveToFirst();
+		if (hasFoundContact) {
+			do {
+				String pseudo = c
+						.getString(c
+								.getColumnIndex(MessengerContract.ContactTable.COLUMN_NAME_PSEUDO));
+				int id = c.getInt(c
+						.getColumnIndex(MessengerContract.COLUMN_NAME_ID));
+
+				Message message = getLastMessageForContact(id);
+				Contact contact = new Contact(id, pseudo, message);
+				contactList.add(contact);
+			} while (c.moveToNext());
+		}
+
 		return contactList;
 	}
 
@@ -96,27 +97,31 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 			ContentValues values = new ContentValues();
 			values.put(MessengerContract.ContactTable.COLUMN_NAME_PSEUDO,
 					contact.getPseudo());
-			if(isContactExisting(contact.getId())){
-				db.update(MessengerContract.ContactTable.TABLE_NAME,
-						values,MessengerContract.COLUMN_NAME_ID+"="+contact.getId(),null);
-			}else{
-				values.put(MessengerContract.COLUMN_NAME_ID,
-						contact.getId());
+			if (isContactExisting(contact.getId())) {
+				db.update(
+						MessengerContract.ContactTable.TABLE_NAME,
+						values,
+						MessengerContract.COLUMN_NAME_ID + "="
+								+ contact.getId(), null);
+			} else {
+				values.put(MessengerContract.COLUMN_NAME_ID, contact.getId());
 				db.insert(MessengerContract.ContactTable.TABLE_NAME, null,
 						values);
-				persistMessage(contact.getLastMessage(), contact.getId());
+				if(contact.getLastMessage() !=null){
+					persistMessage(contact.getLastMessage(), contact.getId());
+				}
 			}
-			
-			
+
 		}
 	}
-	
-	public Message getLastMessageForContact (int contactId){
+
+	public Message getLastMessageForContact(int contactId) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.MessageTable.TABLE_NAME+" WHERE "
-				+MessengerContract.MessageTable.COLUMN_NAME_CONTACT_ID+" = "+contactId
-				+" ORDER BY "+MessengerContract.MessageTable.COLUMN_NAME_DATE+ " ASC";
+				+ MessengerContract.MessageTable.TABLE_NAME + " WHERE "
+				+ MessengerContract.MessageTable.COLUMN_NAME_CONTACT_ID + " = "
+				+ contactId + " ORDER BY "
+				+ MessengerContract.MessageTable.COLUMN_NAME_DATE + " ASC";
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isMessageStored = c.moveToFirst();
@@ -128,52 +133,49 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 			String date = c
 					.getString(c
 							.getColumnIndex(MessengerContract.MessageTable.COLUMN_NAME_DATE));
-			
+
 			int sent = c
 					.getInt(c
 							.getColumnIndex(MessengerContract.MessageTable.COLUMN_NAME_DATE));
 			Message message;
 
-			if(sent==0){
-				 message = new Message(stringMessage, date, false);
-			}else{
-				 message = new Message(stringMessage, date, true);
+			if (sent == 0) {
+				message = new Message(stringMessage, date, false);
+			} else {
+				message = new Message(stringMessage, date, true);
 			}
 			return message;
 
-			
 		} else {
 			return null;
 		}
 	}
-	
-	public void persistMessage(Message message, int contactId){
+
+	public void persistMessage(Message message, int contactId) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
 		values.put(MessengerContract.MessageTable.COLUMN_NAME_MESSAGE,
-				message.getMessage());
+				message.getStringMessage());
 		values.put(MessengerContract.MessageTable.COLUMN_NAME_DATE,
 				message.getStringDate());
 		values.put(MessengerContract.MessageTable.COLUMN_NAME_CONTACT_ID,
 				contactId);
-		if(message.isSent()){
-			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT,
-					1);
-		}else{
-			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT,
-					0);
+		if (message.isSent()) {
+			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT, 1);
+		} else {
+			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT, 0);
 		}
-		
-		db.insert(MessengerContract.MessageTable.TABLE_NAME, null,
-				values);
-		
+
+		db.insert(MessengerContract.MessageTable.TABLE_NAME, null, values);
+
 	}
-	private boolean isContactExisting(int contact_id){
+
+	private boolean isContactExisting(int contact_id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.ContactTable.TABLE_NAME+" WHERE "+MessengerContract.COLUMN_NAME_ID+
-				" = "+contact_id;
+				+ MessengerContract.ContactTable.TABLE_NAME + " WHERE "
+				+ MessengerContract.COLUMN_NAME_ID + " = " + contact_id;
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isContactFound = c.moveToFirst();

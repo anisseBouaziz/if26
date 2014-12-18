@@ -1,5 +1,6 @@
 package fr.utt.if26.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,9 +8,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import fr.utt.if26.R;
+import fr.utt.if26.activity.ConversationActivity;
+import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 
 /**
@@ -31,9 +36,21 @@ public class ContactListFragment extends Fragment {
 				android.R.layout.simple_list_item_1,
 				user.getStringContactList());
 		listView.setAdapter(adapter);
-		
-		
-		
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			  @Override
+			  public void onItemClick(AdapterView<?> adapterView, 
+			    View view, 
+			    int position,
+			    long id) {
+				  String pseudo = (String) adapterView.getItemAtPosition(position);
+					Contact contactWithConversationToDisplay = user
+							.getContactFromPseudo(pseudo);
+					Intent intent = new Intent(getActivity(), ConversationActivity.class);
+					intent.putExtra("contact", contactWithConversationToDisplay);
+					intent.putExtra("user", user);
+					startActivity(intent);
+			  }
+			});
 	}
 
 
@@ -41,7 +58,15 @@ public class ContactListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
-		
+//		Button deleteButton = (Button) getActivity().findViewById(R.id.button_delete_contact);
+//		View.OnClickListener buttonListener = new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				
+//			}
+//		};
+//		deleteButton.setOnClickListener(buttonListener);
 		return view;
 	}
 

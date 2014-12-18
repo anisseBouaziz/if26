@@ -1,7 +1,6 @@
 package fr.utt.if26.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Message implements Serializable {
 
@@ -22,7 +21,7 @@ public class Message implements Serializable {
 		}
 	}
 
-	public String getMessage() {
+	public String getStringMessage() {
 		return message;
 	}
 

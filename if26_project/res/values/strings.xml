@@ -18,5 +18,6 @@
     <string name="title_activity_add_contact">AddContact</string>
     <string name="title_activity_connection">ConnectionActivity</string>
     <string name="title_activity_conversation_activity2">ConversationActivity2</string>
+    <string name="title_activity_delete_contact">DeleteContactActivity</string>
 
 </resources>

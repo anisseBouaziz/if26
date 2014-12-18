@@ -1,6 +1,5 @@
 package fr.utt.if26.fragment;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import android.os.Bundle;

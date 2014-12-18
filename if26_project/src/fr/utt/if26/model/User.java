@@ -1,6 +1,7 @@
 package fr.utt.if26.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,12 +22,22 @@ public class User implements Serializable {
 	}
 
 	public void setContactList(List<Contact> contactList) {
-		Collections.sort(contactList,Collections.reverseOrder());
 		this.contactList = contactList;
 	}
 
-	public List<Contact> getContactList() {
+	public List<Contact> getAllContactList() {
 		return contactList;
+	}
+	
+	public List<Contact> getContactWithAtLeastOneMessageContactList() {
+		List<Contact> contactListWithAtLeastOneMessage = new ArrayList<Contact>();
+		for (Contact contact : contactList) {
+			if(contact.getLastMessage() != null){ // It means no conversation between the user and the contact exists
+				contactListWithAtLeastOneMessage.add(contact);
+			}
+		}
+		Collections.sort(contactListWithAtLeastOneMessage,Collections.reverseOrder());
+		return contactListWithAtLeastOneMessage;
 	}
 
 	public String[] getStringContactList() {
@@ -39,12 +50,12 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Search, in the list of contacts, the contact object corresponding to the complete name given
+	 * Search, in the list of contacts, the contact object corresponding to the given pseudo
 	 */
-	public Contact getContactFromCompleteName(String completeName) {
+	public Contact getContactFromPseudo(String pseudo) {
 		Contact contactToReturn = null;
 		for (Contact contact : contactList) {
-			if (contact.getPseudo().equals(completeName)) {
+			if (contact.getPseudo().equals(pseudo)) {
 				contactToReturn = contact;
 			}
 		}
@@ -58,10 +69,10 @@ public class User implements Serializable {
 	 */
 	public List<String[]> getHistoryDescription() {
 		List<String[]> history = new LinkedList<String[]>();
-		for (int i = 0; i < contactList.size(); i++) {
-			history.add(new String[] { contactList.get(i).getPseudo(), 
-						contactList.get(i).getMessage().getStringDate()
-						+":"+contactList.get(i).getMessage().getMessage()});
+		for (Contact contact : getContactWithAtLeastOneMessageContactList()) {
+			history.add(new String[] { contact.getPseudo(), 
+					contact.getMessage().getStringDate()
+					+":"+contact.getMessage().getStringMessage()});
 		}
 		return history;
 	}
