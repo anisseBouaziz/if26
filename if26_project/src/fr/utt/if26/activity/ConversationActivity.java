@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,19 +79,16 @@ public class ConversationActivity extends Activity implements
 		for (Message message : listMessagesToDisplay) {
 			conversationToDisplay = "<b>"
 					+ message.getState() + " the " + message.getStringDate()
-					+ ":</b><br>" + message.getStringMessage() + "<br><br>";
+					+ ":</b><br>" + message.getStringMessage() + "<br>";
 			
 			View linearLayout =  findViewById(R.id.messageLayout);
 
 	        TextView messageView = new TextView(this);
-	        messageView.setText(conversationToDisplay);
+	        messageView.setText(Html.fromHtml(conversationToDisplay));
 	        messageView.setId(i++);
 	        messageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
 
 	        ((LinearLayout) linearLayout).addView(messageView);
 		}
-		// TextView conversationView = (TextView) this
-		// .findViewById(R.id.conversation);
-		// conversationView.setText(Html.fromHtml(conversationToDisplay));
 	}
 }
