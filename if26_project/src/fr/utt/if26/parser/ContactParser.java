@@ -34,12 +34,8 @@ public class ContactParser {
 				int contactId = (Integer) jsonContact.get("id");
 				String firstName = jsonContact.getJSONObject("contact")
 						.getString("first_name");
-				String lastName = jsonContact.getJSONObject("contact")
-						.getString("last_name");
-				String email = jsonContact.getJSONObject("contact").getString(
-						"email");
-				Contact contact = new Contact(contactId, firstName, lastName,
-						email, message);
+			
+				Contact contact = new Contact(contactId, firstName, message);
 
 				listContact.add(contact);
 			}

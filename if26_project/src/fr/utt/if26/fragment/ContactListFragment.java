@@ -33,6 +33,7 @@ public class ContactListFragment extends Fragment {
 		listView.setAdapter(adapter);
 		
 		
+		
 	}
 
 

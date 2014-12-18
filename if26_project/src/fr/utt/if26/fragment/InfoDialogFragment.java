@@ -34,5 +34,5 @@ public class InfoDialogFragment extends DialogFragment {
 		});
 		return dialog;
 	}
-	
+	 
 }

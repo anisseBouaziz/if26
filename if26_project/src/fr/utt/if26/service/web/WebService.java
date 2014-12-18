@@ -13,31 +13,20 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fr.utt.if26.fragment.InfoDialogFragment;
-import fr.utt.if26.util.InternetConnectionVerificator;
-import android.app.Activity;
 import android.os.AsyncTask;
-
 
 public abstract class WebService extends AsyncTask<String, Integer, JSONObject> {
 
-	protected Activity caller;
-	
-	public WebService(Activity caller) {
-		this.caller = caller;
+	protected Object callerService;
+
+	public WebService(Object callerService) {
+		this.callerService = callerService;
 	}
 
 	@Override
 	protected JSONObject doInBackground(String... params) {
-		if (InternetConnectionVerificator.isNetworkAvailable(caller)) {
-			JSONObject JSONResponse = executeRequest(params[0]);
-			return JSONResponse;
-		} else {
-			this.cancel(true);
-			new InfoDialogFragment("Internet connection unavailable").show(caller.getFragmentManager(),
-					"Internet connection unavailable");
-			return null;
-		}
+		JSONObject JSONResponse = executeRequest(params[0]);
+		return JSONResponse;
 
 	}
 

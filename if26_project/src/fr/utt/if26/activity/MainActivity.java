@@ -16,8 +16,6 @@ import fr.utt.if26.service.business.ConnectionService;
  */
 public class MainActivity extends Activity{
 
-	private User user;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,14 +23,15 @@ public class MainActivity extends Activity{
 		setContentView(R.layout.activity_main);
 		
 		MessengerDBHelper sqlHelper=new MessengerDBHelper(getApplicationContext());
-		user=sqlHelper.getUserStored();
-		if(user==null){
+		String token=sqlHelper.getUserStored();
+		if(token==null){
 			Intent intent = new Intent(this,ConnectionActivity.class);
 			startActivity(intent);
 		}
 		else{
-			ConnectionService connectionService = new ConnectionService(this);
-			connectionService.initializeUserInformations(user);
+			User user = new User(token);
+			ConnectionService connectionService = new ConnectionService(this,user);
+			connectionService.initializeUserInformations();
 		}
 		
 

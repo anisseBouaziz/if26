@@ -2,20 +2,18 @@ package fr.utt.if26.service.web;
 
 import org.json.JSONObject;
 
-import android.app.Activity;
-
 /**
  * WebService called to retrieve a list of messages (which corresponds to a conversation)
  * Classes using this web-service have to implement the {@link IRetrieveMessageListService} interface
  */
 public class WebServiceMessageList extends WebService {
 
-	public WebServiceMessageList(Activity caller) {
-		super(caller);
+	public WebServiceMessageList(Object callerService) {
+		super(callerService);
 	}
 
 	protected void onPostExecute(JSONObject result) {
-		((IRetrieveMessageListService) caller).retrieveMessageList(result);
+		((IRetrieveMessageListService) callerService).retrieveMessageList(result);
 		super.onPostExecute(result);
 	}
 }

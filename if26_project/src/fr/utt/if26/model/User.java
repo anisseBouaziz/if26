@@ -32,7 +32,7 @@ public class User implements Serializable {
 	public String[] getStringContactList() {
 		String list[] = new String[contactList.size()];
 		for (int i = 0; i < contactList.size(); i++) {
-			list[i] = contactList.get(i).getCompleteName();
+			list[i] = contactList.get(i).getPseudo();
 		}
 		Arrays.sort(list);
 		return list;
@@ -44,7 +44,7 @@ public class User implements Serializable {
 	public Contact getContactFromCompleteName(String completeName) {
 		Contact contactToReturn = null;
 		for (Contact contact : contactList) {
-			if (contact.getCompleteName().equals(completeName)) {
+			if (contact.getPseudo().equals(completeName)) {
 				contactToReturn = contact;
 			}
 		}
@@ -59,7 +59,7 @@ public class User implements Serializable {
 	public List<String[]> getHistoryDescription() {
 		List<String[]> history = new LinkedList<String[]>();
 		for (int i = 0; i < contactList.size(); i++) {
-			history.add(new String[] { contactList.get(i).getFirstName(), 
+			history.add(new String[] { contactList.get(i).getPseudo(), 
 						contactList.get(i).getMessage().getStringDate()
 						+":"+contactList.get(i).getMessage().getMessage()});
 		}
