@@ -18,7 +18,7 @@ public class ConversationService implements IRetrieveMessageListService {
 
 	private ConversationActivity callerActivity;
 	private MessengerDBHelper sqlHelper;
-	private static final String SERVICE_URL = "http://192.168.56.1/messenger/"; //$NON-NLS-1$
+	private static final String SERVICE_URL = "http://192.168.4.1/messenger/"; //$NON-NLS-1$
 	private Contact contact;
 	private User user;
 	

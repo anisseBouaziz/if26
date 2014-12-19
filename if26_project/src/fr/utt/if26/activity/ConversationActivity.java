@@ -74,21 +74,24 @@ public class ConversationActivity extends Activity implements
 	 * Display conversation
 	 */
 	public void displayConversation(List<Message> listMessagesToDisplay) {
-		String conversationToDisplay = "";
-		int i=0;
 		for (Message message : listMessagesToDisplay) {
-			conversationToDisplay = "<b>"
-					+ message.getState() + " the " + message.getStringDate()
-					+ ":</b><br>" + message.getStringMessage() + "<br>";
-			
-			View linearLayout =  findViewById(R.id.messageLayout);
-
-	        TextView messageView = new TextView(this);
-	        messageView.setText(Html.fromHtml(conversationToDisplay));
-	        messageView.setId(i++);
-	        messageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
-
-	        ((LinearLayout) linearLayout).addView(messageView);
+			displayMessageOnTheScreen(message);
 		}
+	}
+
+	private void displayMessageOnTheScreen(Message message) {
+		String messageToDisplay;
+		messageToDisplay = "<b>"
+				+ message.getState() + " the " + message.getStringDate()
+				+ ":</b><br>" + message.getStringMessage() + "<br>";
+		
+		View linearLayout =  findViewById(R.id.messageLayout);
+
+		TextView messageView = new TextView(this);
+		messageView.setText(Html.fromHtml(messageToDisplay));
+		messageView.setId(message.getId());
+		messageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+
+		((LinearLayout) linearLayout).addView(messageView);
 	}
 }

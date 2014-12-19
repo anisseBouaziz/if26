@@ -152,7 +152,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 				+ MessengerDBContract.MessageTable.TABLE_NAME + " WHERE "
 				+ MessengerDBContract.MessageTable.COLUMN_NAME_CONTACT_ID + " = "
 				+ contactId + " ORDER BY "
-				+ MessengerDBContract.MessageTable.COLUMN_NAME_DATE + " DESC";
+				+ MessengerDBContract.MessageTable.COLUMN_NAME_DATE + " ASC";
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isMessageStored = c.moveToFirst();

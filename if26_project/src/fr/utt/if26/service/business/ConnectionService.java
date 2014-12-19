@@ -27,7 +27,7 @@ public class ConnectionService implements IConnectionService,
 
 	private Activity currentActivity;
 	private User user;
-	private static final String SERVICE_URL = "http://192.168.56.1/messenger/"; //$NON-NLS-1$
+	private static final String SERVICE_URL = "http://192.168.4.1/messenger/"; //$NON-NLS-1$
 	private MessengerDBHelper sqlHelper;
 
 	public ConnectionService(Activity currentActivity) {
@@ -106,7 +106,7 @@ public class ConnectionService implements IConnectionService,
 	}
 
 	/**
-	 * Method called by the WebService after the server returned the wanted JSON
+	 * Method called by the WebService after the server returned the wanted JSON contening contacts
 	 */
 	@Override
 	public void retrieveContacts(JSONObject result) {
@@ -117,11 +117,19 @@ public class ConnectionService implements IConnectionService,
 				user.setContactList(contactList);
 				sqlHelper.persistOrUpdateContacts(contactList);
 				goToHomePageActivity();
+			}else{
+				sqlHelper.getWritableDatabase().delete(MessengerDBContract.UserTable.TABLE_NAME, null, null);
+				goToConnectionActivity();
 			}
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void goToConnectionActivity() {
+		Intent intent = new Intent(currentActivity, ConnectionActivity.class);
+		currentActivity.startActivity(intent);		
 	}
 
 	private void goToHomePageActivity() {

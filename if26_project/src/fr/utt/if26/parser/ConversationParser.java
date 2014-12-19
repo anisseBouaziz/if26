@@ -38,7 +38,7 @@ public class ConversationParser {
 		String stringMessage = jsonMessage.getString("message");
 		String date = jsonMessage.getString("date");
 		boolean isSent = jsonMessage.getBoolean("sent");
-		int id=jsonMessage.getJSONObject("message").getInt("id");
+		int id=jsonMessage.getInt("id");
 		Message message = new Message(stringMessage, date, isSent,id);
 		return message;
 	}
