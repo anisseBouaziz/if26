@@ -19,31 +19,39 @@ public class ConversationService implements IRetrieveMessageListService {
 	private ConversationActivity callerActivity;
 	private MessengerDBHelper sqlHelper;
 	private static final String SERVICE_URL = "http://192.168.56.1/messenger/"; //$NON-NLS-1$
-
-
-	public ConversationService(ConversationActivity callerActivity) {
+	private Contact contact;
+	private User user;
+	
+	public ConversationService(ConversationActivity callerActivity,User user, Contact contact) {
 		this.callerActivity = callerActivity;
 		sqlHelper = new MessengerDBHelper(
 				callerActivity.getApplicationContext());
+		this.contact=contact;
+		this.user=user;
 	}
 
-	public void getConversationWithContact(Contact contact,User user) {
+	public void retrieveConversation() {
 		if (InternetConnectionVerificator.isNetworkAvailable(callerActivity)) {
-			String urlRequest = SERVICE_URL+"messages.php?token="+user.getToken()
-					+"&contact="+contact.getId(); //$NON-NLS-1$
+			String urlRequest = SERVICE_URL + "messages.php?token="
+					+ user.getToken() + "&contact=" + contact.getId(); //$NON-NLS-1$
 
 			WebServiceMessageList webService = new WebServiceMessageList(this);
 			webService.execute(urlRequest);
-			
+
 		} else {
-			List<Message> listMessagesToDisplay = sqlHelper.getMessagesWithContact(contact);
+			List<Message> listMessagesToDisplay = sqlHelper
+					.getMessagesWithContact(contact);
 			callerActivity.displayConversation(listMessagesToDisplay);
 		}
 	}
 
 	@Override
 	public void retrieveMessageList(JSONObject result) {
-		List<Message> listMessagesToDisplay = ConversationParser.jsonToMessageList(result);
+		List<Message> listMessagesToDisplay = ConversationParser
+				.jsonToMessageList(result);
+		for (Message message : listMessagesToDisplay) {
+			sqlHelper.persistMessage(message, contact.getId());
+		}
 		callerActivity.displayConversation(listMessagesToDisplay);
 	}
 

@@ -23,9 +23,9 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(MessengerContract.CREATE_TABLE_USER);
-		db.execSQL(MessengerContract.CREATE_TABLE_MESSAGE);
-		db.execSQL(MessengerContract.CREATE_TABLE_CONTACT);
+		db.execSQL(MessengerDBContract.CREATE_TABLE_USER);
+		db.execSQL(MessengerDBContract.CREATE_TABLE_MESSAGE);
+		db.execSQL(MessengerDBContract.CREATE_TABLE_CONTACT);
 	}
 
 	@Override
@@ -36,11 +36,11 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(MessengerContract.UserTable.COLUMN_NAME_TOKEN,
+		values.put(MessengerDBContract.UserTable.COLUMN_NAME_TOKEN,
 				user.getToken());
 
 		// insert row
-		long user_id = db.insert(MessengerContract.UserTable.TABLE_NAME, null,
+		long user_id = db.insert(MessengerDBContract.UserTable.TABLE_NAME, null,
 				values);
 
 		return user_id;
@@ -49,7 +49,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 	public String getUserStored() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.UserTable.TABLE_NAME;
+				+ MessengerDBContract.UserTable.TABLE_NAME;
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isUserStored = c.moveToFirst();
@@ -57,7 +57,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 		if (isUserStored) {
 			String token = c
 					.getString(c
-							.getColumnIndex(MessengerContract.UserTable.COLUMN_NAME_TOKEN));
+							.getColumnIndex(MessengerDBContract.UserTable.COLUMN_NAME_TOKEN));
 			return token;
 		} else {
 			return null;
@@ -69,7 +69,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 		List<Contact> contactList = new ArrayList<Contact>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.ContactTable.TABLE_NAME;
+				+ MessengerDBContract.ContactTable.TABLE_NAME;
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean hasFoundContact=c.moveToFirst();
@@ -77,9 +77,9 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 			do {
 				String pseudo = c
 						.getString(c
-								.getColumnIndex(MessengerContract.ContactTable.COLUMN_NAME_PSEUDO));
+								.getColumnIndex(MessengerDBContract.ContactTable.COLUMN_NAME_PSEUDO));
 				int id = c.getInt(c
-						.getColumnIndex(MessengerContract.COLUMN_NAME_ID));
+						.getColumnIndex(MessengerDBContract.COLUMN_NAME_ID));
 
 				Message message = getLastMessageForContact(id);
 				Contact contact = new Contact(id, pseudo, message);
@@ -95,17 +95,17 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 
 		for (Contact contact : contactList) {
 			ContentValues values = new ContentValues();
-			values.put(MessengerContract.ContactTable.COLUMN_NAME_PSEUDO,
+			values.put(MessengerDBContract.ContactTable.COLUMN_NAME_PSEUDO,
 					contact.getPseudo());
 			if (isContactExisting(contact.getId())) {
 				db.update(
-						MessengerContract.ContactTable.TABLE_NAME,
+						MessengerDBContract.ContactTable.TABLE_NAME,
 						values,
-						MessengerContract.COLUMN_NAME_ID + "="
+						MessengerDBContract.COLUMN_NAME_ID + "="
 								+ contact.getId(), null);
 			} else {
-				values.put(MessengerContract.COLUMN_NAME_ID, contact.getId());
-				db.insert(MessengerContract.ContactTable.TABLE_NAME, null,
+				values.put(MessengerDBContract.COLUMN_NAME_ID, contact.getId());
+				db.insert(MessengerDBContract.ContactTable.TABLE_NAME, null,
 						values);
 				if(contact.getLastMessage() !=null){
 					persistMessage(contact.getLastMessage(), contact.getId());
@@ -116,75 +116,96 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 	}
 
 	public Message getLastMessageForContact(int contactId) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.MessageTable.TABLE_NAME + " WHERE "
-				+ MessengerContract.MessageTable.COLUMN_NAME_CONTACT_ID + " = "
-				+ contactId + " ORDER BY "
-				+ MessengerContract.MessageTable.COLUMN_NAME_DATE + " ASC";
-
-		Cursor c = db.rawQuery(selectQuery, null);
-		boolean isMessageStored = c.moveToFirst();
-
-		if (isMessageStored) {
-			String stringMessage = c
-					.getString(c
-							.getColumnIndex(MessengerContract.MessageTable.COLUMN_NAME_MESSAGE));
-			String date = c
-					.getString(c
-							.getColumnIndex(MessengerContract.MessageTable.COLUMN_NAME_DATE));
-
-			int sent = c
-					.getInt(c
-							.getColumnIndex(MessengerContract.MessageTable.COLUMN_NAME_DATE));
-			Message message;
-
-			if (sent == 0) {
-				message = new Message(stringMessage, date, false);
-			} else {
-				message = new Message(stringMessage, date, true);
-			}
-			return message;
-
-		} else {
-			return null;
+		if(getMessagesWithContact(contactId).size()!=0){
+			return getMessagesWithContact(contactId).get(0);
 		}
+		return null;
 	}
 
 	public void persistMessage(Message message, int contactId) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(MessengerContract.MessageTable.COLUMN_NAME_MESSAGE,
+		values.put(MessengerDBContract.MessageTable.COLUMN_NAME_MESSAGE,
 				message.getStringMessage());
-		values.put(MessengerContract.MessageTable.COLUMN_NAME_DATE,
+		values.put(MessengerDBContract.MessageTable.COLUMN_NAME_DATE,
 				message.getStringDate());
-		values.put(MessengerContract.MessageTable.COLUMN_NAME_CONTACT_ID,
+		values.put(MessengerDBContract.COLUMN_NAME_ID,
+				message.getId());
+		values.put(MessengerDBContract.MessageTable.COLUMN_NAME_CONTACT_ID,
 				contactId);
 		if (message.isSent()) {
-			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT, 1);
+			values.put(MessengerDBContract.MessageTable.COLUMN_NAME_SENT, 1);
 		} else {
-			values.put(MessengerContract.MessageTable.COLUMN_NAME_SENT, 0);
+			values.put(MessengerDBContract.MessageTable.COLUMN_NAME_SENT, 0);
 		}
 
-		db.insert(MessengerContract.MessageTable.TABLE_NAME, null, values);
+		db.insert(MessengerDBContract.MessageTable.TABLE_NAME, null, values);
 
 	}
+
+
+	public List<Message> getMessagesWithContact(int contactId) {
+		List<Message> listMessage = new ArrayList<Message>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM "
+				+ MessengerDBContract.MessageTable.TABLE_NAME + " WHERE "
+				+ MessengerDBContract.MessageTable.COLUMN_NAME_CONTACT_ID + " = "
+				+ contactId + " ORDER BY "
+				+ MessengerDBContract.MessageTable.COLUMN_NAME_DATE + " DESC";
+
+		Cursor c = db.rawQuery(selectQuery, null);
+		boolean isMessageStored = c.moveToFirst();
+
+		if (isMessageStored) {
+			do{
+			Message message = extractMessageFromCursor(c);
+			listMessage.add(message);
+			}while(c.moveToNext());
+		} 
+		return listMessage;
+	}
+	
+	public List<Message> getMessagesWithContact(Contact contact) {
+		return getMessagesWithContact(contact.getId());
+	}
+
+	private Message extractMessageFromCursor(Cursor c) {
+		String stringMessage = c
+				.getString(c
+						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_MESSAGE));
+		String date = c
+				.getString(c
+						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_DATE));
+
+		int sent = c
+				.getInt(c
+						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_DATE));
+		int id = c
+				.getInt(c
+						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_DATE));
+		
+		Message message;
+
+		if (sent == 0) {
+			message = new Message(stringMessage, date, false,id);
+		} else {
+			message = new Message(stringMessage, date, true,id);
+		}
+		return message;
+	}
+
 
 	private boolean isContactExisting(int contact_id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "
-				+ MessengerContract.ContactTable.TABLE_NAME + " WHERE "
-				+ MessengerContract.COLUMN_NAME_ID + " = " + contact_id;
+				+ MessengerDBContract.ContactTable.TABLE_NAME + " WHERE "
+				+ MessengerDBContract.COLUMN_NAME_ID + " = " + contact_id;
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isContactFound = c.moveToFirst();
 		return isContactFound;
 	}
 
-	public List<Message> getMessagesWithContact(Contact contact) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

@@ -30,7 +30,8 @@ public class ContactParser {
 							"date");
 					boolean sent = jsonContact.getJSONObject("message").getBoolean(
 							"sent");
-					message = new Message(stringMessage, date, sent);
+					int id=jsonContact.getJSONObject("message").getInt("id");
+					message = new Message(stringMessage, date, sent,id);
 				}
 				
 

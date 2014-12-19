@@ -9,8 +9,9 @@ public class Message implements Serializable {
 	private String date;
 	private String state;
 	private boolean sent;
+	private int id;
 
-	public Message(String message, String date, boolean sent) {
+	public Message(String message, String date, boolean sent,int id) {
 		this.message = message;
 		this.date = date;
 		this.sent = sent;
@@ -19,6 +20,7 @@ public class Message implements Serializable {
 		} else {
 			state = "Received";
 		}
+		this.id=id;
 	}
 
 	public String getStringMessage() {
@@ -35,6 +37,10 @@ public class Message implements Serializable {
 
 	public boolean isSent() {
 		return sent;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	

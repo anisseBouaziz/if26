@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  * When he disconnects himself we clear the database content.
  * For the current user we only save the token which will permit us to do server requests
  */
-public final class MessengerContract {
+public final class MessengerDBContract {
 	
 	// Common for all tables
 	public static final String COLUMN_NAME_ID = "id";
@@ -43,7 +43,7 @@ public final class MessengerContract {
 			+ ")";
 
 	public static final String CREATE_TABLE_MESSAGE = "CREATE TABLE " + MessageTable.TABLE_NAME
-			+ "(" + COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MessageTable.COLUMN_NAME_CONTACT_ID
+			+ "(" + COLUMN_NAME_ID + " INTEGER PRIMARY KEY," + MessageTable.COLUMN_NAME_CONTACT_ID
 			+ " INTEGER,"+ MessageTable.COLUMN_NAME_MESSAGE + " TEXT,"+ MessageTable.COLUMN_NAME_DATE + " DATETIME,"
 			+ MessageTable.COLUMN_NAME_SENT + " INTEGER"+")";
 

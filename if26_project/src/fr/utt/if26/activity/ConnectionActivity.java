@@ -43,7 +43,6 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 		
 		connectionService = new ConnectionService(this);
 
-
 		View.OnClickListener buttonListener = new View.OnClickListener() {
 
 			@Override

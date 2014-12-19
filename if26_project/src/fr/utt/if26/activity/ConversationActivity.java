@@ -36,8 +36,8 @@ public class ConversationActivity extends Activity implements
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
-		ConversationService conversationService=new ConversationService(this);
-		conversationService.getConversationWithContact(contactWithConversationToDisplay, user);
+		ConversationService conversationService=new ConversationService(this,user,contactWithConversationToDisplay);
+		conversationService.retrieveConversation();
 
 	}
 

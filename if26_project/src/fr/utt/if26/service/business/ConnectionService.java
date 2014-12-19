@@ -13,6 +13,7 @@ import fr.utt.if26.fragment.InfoDialogFragment;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ContactParser;
+import fr.utt.if26.persistence.MessengerDBContract;
 import fr.utt.if26.persistence.MessengerDBHelper;
 import fr.utt.if26.service.web.IConnectionService;
 import fr.utt.if26.service.web.IRetrieveContactsService;
@@ -96,6 +97,8 @@ public class ConnectionService implements IConnectionService,
 	}
 
 	private void retrieveContactsFromServer() {
+		sqlHelper.getWritableDatabase().delete(MessengerDBContract.ContactTable.TABLE_NAME, null, null);
+		sqlHelper.getWritableDatabase().delete(MessengerDBContract.MessageTable.TABLE_NAME, null, null);
 		WebService webService = new WebServiceContacts(this);
 		String urlRequest = SERVICE_URL
 				+ "contacts.php?token=" + user.getToken(); //$NON-NLS-1$
