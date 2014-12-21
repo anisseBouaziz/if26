@@ -29,6 +29,7 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 	private EditText password;
 	private TextView errorMessage;
 	private ConnectionService connectionService;
+	private ConnectionActivity currentActivity;
 	private User user;
 
 	@Override
@@ -38,10 +39,12 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 		email = (EditText) this.findViewById(R.id.email);
 		password = (EditText) this.findViewById(R.id.password);
 		Button connectionButton = (Button) findViewById(R.id.connection);
+		Button inscriptionButton = (Button) findViewById(R.id.inscription);
 		errorMessage = (TextView) findViewById(R.id.errorMessage);
 		errorMessage.setVisibility(View.GONE);
 		
 		connectionService = new ConnectionService(this);
+		currentActivity =this;
 
 		View.OnClickListener buttonListener = new View.OnClickListener() {
 
@@ -53,6 +56,17 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 			}
 		};
 		connectionButton.setOnClickListener(buttonListener);
+		
+		View.OnClickListener inscriptionListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(currentActivity, InscriptionActivity.class);
+				startActivity(intent);
+			}
+		};
+		inscriptionButton.setOnClickListener(inscriptionListener);
+
 
 	}
 

@@ -27,7 +27,7 @@ public class ConnectionService implements IConnectionService,
 
 	private Activity currentActivity;
 	private User user;
-	private static final String SERVICE_URL = "http://192.168.4.1/messenger/"; //$NON-NLS-1$
+	private static final String SERVICE_URL = "http://192.168.0.20/messenger/"; //$NON-NLS-1$
 	private MessengerDBHelper sqlHelper;
 
 	public ConnectionService(Activity currentActivity) {

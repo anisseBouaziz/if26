@@ -61,6 +61,14 @@
             android:name=".ConversationActivity"
             android:label="@string/title_activity_conversation" >
         </activity>
+        <activity
+            android:name=".DeleteContactActivity"
+            android:label="@string/title_activity_delete_contact" >
+        </activity>
+        <activity
+            android:name="fr.utt.if26.activity.InscriptionActivity"
+            android:label="@string/title_activity_inscription" >
+        </activity>
     </application>
 
 </manifest>
