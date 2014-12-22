@@ -27,7 +27,6 @@ public class ConnectionService implements IConnectionService,
 
 	private Activity currentActivity;
 	private User user;
-	private static final String SERVICE_URL = "http://192.168.0.20/messenger/"; //$NON-NLS-1$
 	private MessengerDBHelper sqlHelper;
 
 	public ConnectionService(Activity currentActivity) {
@@ -50,7 +49,7 @@ public class ConnectionService implements IConnectionService,
 	 */
 	public void connectUser(String email, String password) {
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
-			String urlRequest = SERVICE_URL + "login.php?email=" + email
+			String urlRequest = WebService.SERVICE_URL + "login.php?email=" + email
 					+ "&password=" + password;
 			WebService webService = new WebServiceConnection(this);
 			webService.execute(urlRequest);
@@ -100,7 +99,7 @@ public class ConnectionService implements IConnectionService,
 		sqlHelper.getWritableDatabase().delete(MessengerDBContract.ContactTable.TABLE_NAME, null, null);
 		sqlHelper.getWritableDatabase().delete(MessengerDBContract.MessageTable.TABLE_NAME, null, null);
 		WebService webService = new WebServiceContacts(this);
-		String urlRequest = SERVICE_URL
+		String urlRequest = WebService.SERVICE_URL
 				+ "contacts.php?token=" + user.getToken(); //$NON-NLS-1$
 		webService.execute(urlRequest);
 	}

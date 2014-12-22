@@ -30,9 +30,9 @@ public class AddContactActivity extends Activity {
 		errorMessage = (TextView) findViewById(R.id.errorMessageAdd);
 		errorMessage.setVisibility(View.GONE);
 		addUserButton = (Button) findViewById(R.id.addButton);
-		addService = new AddContactService(this);
 		
 		user = (User) getIntent().getSerializableExtra("user");
+		addService = new AddContactService(this,user);
 		currentActivity = this;
 		
 		View.OnClickListener buttonListener = new View.OnClickListener() {
@@ -45,7 +45,7 @@ public class AddContactActivity extends Activity {
 					currentActivity.displayErrorMessage("User not find, try another pseudo");
 				}
 				else{
-					addService.findContact(pseudo_string,user.getToken());
+					addService.findContact(pseudo_string);
 				}
 			}
 		};

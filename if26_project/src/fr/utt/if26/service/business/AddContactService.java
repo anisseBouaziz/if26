@@ -22,26 +22,19 @@ import fr.utt.if26.util.InternetConnectionVerificator;
 public class AddContactService implements IAddFriendService {
 	private Activity currentActivity;
 	private User user;
-	private static final String SERVICE_URL = "http://192.168.0.20/messenger/"; //$NON-NLS-1$
-	private MessengerDBHelper sqlHelper;
 	
-	public AddContactService(Activity currentActivity) {
-			this.currentActivity = currentActivity;
-			sqlHelper = new MessengerDBHelper(
-			currentActivity.getApplicationContext());
-	}
+	
+	
 	
 	public AddContactService(Activity currentActivity, User user) {
-		super();
 		this.currentActivity = currentActivity;
-		sqlHelper = new MessengerDBHelper(
-				currentActivity.getApplicationContext());
+				currentActivity.getApplicationContext();
 		this.user=user;
 	}
 		
-	public void findContact(String pseudo, String token){
+	public void findContact(String pseudo){
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
-			String urlRequest = SERVICE_URL + "addFriendRequest.php?token="+token+"&pseudo="+pseudo;
+			String urlRequest = WebService.SERVICE_URL + "addFriendRequest.php?token="+user.getToken()+"&pseudo="+pseudo;
 			WebService webService = new WebServiceAddFriend(this);
 			webService.execute(urlRequest);
 		} else {
