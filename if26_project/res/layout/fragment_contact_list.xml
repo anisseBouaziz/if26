@@ -29,6 +29,7 @@
         android1:layout_height="wrap_content"
         android1:layout_alignParentBottom="true"
         android1:layout_alignParentLeft="true"
+        android1:onClick="addContactClick"
         android1:text="Add new contact" />
 
     <Button

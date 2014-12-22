@@ -66,8 +66,12 @@
             android:label="@string/title_activity_delete_contact" >
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.InscriptionActivity"
+            android:name=".activity.InscriptionActivity"
             android:label="@string/title_activity_inscription" >
+        </activity>
+        <activity
+            android:name="fr.utt.if26.activity.AddContactActivity"
+            android:label="@string/title_activity_add_contact" >
         </activity>
     </application>
 
