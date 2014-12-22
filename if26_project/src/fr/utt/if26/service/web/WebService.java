@@ -2,7 +2,6 @@ package fr.utt.if26.service.web;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -18,6 +17,7 @@ import android.os.AsyncTask;
 public abstract class WebService extends AsyncTask<String, Integer, JSONObject> {
 
 	protected Object callerService;
+	public static final String SERVICE_URL = "http://192.168.1.4/messenger/";
 
 	public WebService(Object callerService) {
 		this.callerService = callerService;
@@ -31,11 +31,12 @@ public abstract class WebService extends AsyncTask<String, Integer, JSONObject> 
 	}
 
 	private JSONObject executeRequest(String uri) {
-		HttpGet httpGet = new HttpGet(uri);
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpResponse httpResponse = null;
-		String responseString = null;
+		HttpGet httpGet;		
 		try {
+			httpGet = new HttpGet(uri);
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpResponse httpResponse = null;
+			String responseString = null;
 			httpResponse = httpClient.execute(httpGet);
 			StatusLine statusLine = httpResponse.getStatusLine();
 			if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
@@ -45,20 +46,22 @@ public abstract class WebService extends AsyncTask<String, Integer, JSONObject> 
 				httpResponse.getEntity().getContent().close();
 				throw new IOException(statusLine.getReasonPhrase());
 			}
+			JSONObject jSONResponse = null;
+
+			jSONResponse = new JSONObject(responseString);
+			return jSONResponse;
+
 
 		} catch (ClientProtocolException clientProtocolException) {
 			clientProtocolException.printStackTrace();
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
-		}
-
-		JSONObject JSONResponse = null;
-		try {
-			JSONResponse = new JSONObject(responseString);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return JSONResponse;
+		return null;
+
+
 	}
 
 	private String convertHttpResponseToString(HttpResponse httpResponse)

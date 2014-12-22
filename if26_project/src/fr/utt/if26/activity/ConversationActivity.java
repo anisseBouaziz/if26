@@ -1,5 +1,6 @@
 package fr.utt.if26.activity;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -10,6 +11,8 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -19,14 +22,15 @@ import fr.utt.if26.model.Message;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ConversationParser;
 import fr.utt.if26.service.business.ConversationService;
-import fr.utt.if26.service.web.IRetrieveMessageListService;
 
-public class ConversationActivity extends Activity implements
-		IRetrieveMessageListService {
+public class ConversationActivity extends Activity {
 
 
 	private Contact contactWithConversationToDisplay;
 	private User user;
+	private EditText messageToSendEditText;
+	private Button sendButton;
+	private ConversationService conversationService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +40,12 @@ public class ConversationActivity extends Activity implements
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
-		ConversationService conversationService=new ConversationService(this,user,contactWithConversationToDisplay);
+		conversationService=new ConversationService(this,user,contactWithConversationToDisplay);
 		conversationService.retrieveConversation();
+		initializeListeners();
 
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,15 +66,6 @@ public class ConversationActivity extends Activity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * Get all the conversation with the choosen contact
-	 */
-	@Override
-	public void retrieveMessageList(JSONObject jsonMessageList) {
-		List<Message> listMessagesToDisplay = ConversationParser
-				.jsonToMessageList(jsonMessageList);
-		displayConversation(listMessagesToDisplay);
-	}
 
 	/**
 	 * Display conversation
@@ -77,6 +74,11 @@ public class ConversationActivity extends Activity implements
 		for (Message message : listMessagesToDisplay) {
 			displayMessageOnTheScreen(message);
 		}
+	}
+	
+	public void refreshConversation(){
+		startActivity(getIntent());
+		finish();
 	}
 
 	private void displayMessageOnTheScreen(Message message) {
@@ -93,5 +95,21 @@ public class ConversationActivity extends Activity implements
 		messageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
 
 		((LinearLayout) linearLayout).addView(messageView);
+	}
+	
+	private void initializeListeners() {
+		messageToSendEditText = (EditText) findViewById(R.id.message);
+		sendButton = (Button) findViewById(R.id.send_button);
+		
+		sendButton.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				String stringMessage = messageToSendEditText.getText().toString();
+				conversationService.sendMessage(stringMessage);
+			}
+			
+		});
+		
 	}
 }

@@ -1,13 +1,6 @@
 package fr.utt.if26.activity;
 
-import fr.utt.if26.R;
-import fr.utt.if26.R.id;
-import fr.utt.if26.R.layout;
-import fr.utt.if26.R.menu;
-import fr.utt.if26.model.User;
-import fr.utt.if26.service.business.AddContactService;
-import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import fr.utt.if26.R;
+import fr.utt.if26.model.User;
+import fr.utt.if26.service.business.AddContactService;
 
-public class AddContactActivity extends ActionBarActivity {
+public class AddContactActivity extends Activity {
 
 	private EditText pseudoAddContact;
 	private TextView errorMessage;
@@ -46,7 +42,7 @@ public class AddContactActivity extends ActionBarActivity {
 				String pseudo_string = pseudoAddContact.getText().toString();
 
 				if (currentActivity.verificationEmptyField()){
-					currentActivity.displayIncorrectInscriptionErrorMessage("User not find, try another pseudo");
+					currentActivity.displayErrorMessage("User not find, try another pseudo");
 				}
 				else{
 					addService.findContact(pseudo_string,user.getToken());
@@ -87,13 +83,12 @@ public class AddContactActivity extends ActionBarActivity {
 		return emptyField;
 	}
 	
-	public void displayIncorrectInscriptionErrorMessage(String text){
+	public void displayErrorMessage(String text){
 		errorMessage.setText(text);
 		errorMessage.setVisibility(View.VISIBLE);
 	}
 	
-	public void hideIncorrectInscriptionErrorMessage(String text){
-		errorMessage.setText(text);
+	public void hideErrorMessage(){
 		errorMessage.setVisibility(View.GONE);
 	}
 	

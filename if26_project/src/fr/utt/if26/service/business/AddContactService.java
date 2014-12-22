@@ -13,9 +13,8 @@ import fr.utt.if26.fragment.InfoDialogFragment;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 import fr.utt.if26.parser.ContactParser;
-import fr.utt.if26.persistence.MessengerDBContract;
 import fr.utt.if26.persistence.MessengerDBHelper;
-import fr.utt.if26.service.web.IAddFriendService;
+import fr.utt.if26.service.IAddFriendService;
 import fr.utt.if26.service.web.WebService;
 import fr.utt.if26.service.web.WebServiceAddFriend;
 import fr.utt.if26.util.InternetConnectionVerificator;
@@ -39,9 +38,7 @@ public class AddContactService implements IAddFriendService {
 				currentActivity.getApplicationContext());
 		this.user=user;
 	}
-	
-	
-	
+		
 	public void findContact(String pseudo, String token){
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
 			String urlRequest = SERVICE_URL + "addFriendRequest.php?token="+token+"&pseudo="+pseudo;
@@ -52,21 +49,18 @@ public class AddContactService implements IAddFriendService {
 					currentActivity.getFragmentManager(),
 					"Internet connection unavailable");
 		}
-	}
-	
-	
-	
+	}	
 
 	public void instanciateFriendRequest(JSONObject result) {
 	
 		try {
 			if (!result.getBoolean("error")) {
 				((AddContactActivity) currentActivity)
-				.displayIncorrectInscriptionErrorMessage("Friend Request send");
+				.displayErrorMessage("Friend Request send");
 				goToHomePageActivity();
 			}else{
 				((AddContactActivity) currentActivity)
-				.displayIncorrectInscriptionErrorMessage("Couldn't add contact");
+				.displayErrorMessage(result.getString("description"));
 				goToHomePageActivity();
 			}
 

@@ -1,4 +1,4 @@
-package fr.utt.if26.service.web;
+package fr.utt.if26.service;
 
 import org.json.JSONObject;
 

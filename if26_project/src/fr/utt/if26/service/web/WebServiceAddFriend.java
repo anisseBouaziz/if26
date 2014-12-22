@@ -2,6 +2,8 @@ package fr.utt.if26.service.web;
 
 import org.json.JSONObject;
 
+import fr.utt.if26.service.IAddFriendService;
+
 public class WebServiceAddFriend extends WebService {
 	
 	public WebServiceAddFriend(Object callerService) {

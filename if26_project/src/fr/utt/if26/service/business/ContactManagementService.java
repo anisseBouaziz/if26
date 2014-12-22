@@ -4,8 +4,8 @@ import org.json.JSONObject;
 
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
-import fr.utt.if26.service.web.IRetrieveContactsService;
-import fr.utt.if26.service.web.IRetrieveMessageListService;
+import fr.utt.if26.service.IRetrieveContactsService;
+import fr.utt.if26.service.IRetrieveMessageListService;
 
 public class ContactManagementService implements IRetrieveContactsService {
 
