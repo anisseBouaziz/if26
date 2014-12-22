@@ -9,26 +9,6 @@
     tools:context="fr.utt.if26.activity.InscriptionActivity" >
 
     <TextView
-        android:id="@+id/labelInscription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:text="Inscription"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/passwordInscription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonInscription"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="38dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <TextView
         android:id="@+id/labelPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,33 +17,6 @@
         android:layout_marginBottom="17dp"
         android:layout_marginLeft="10dp"
         android:text="Password" />
-
-    <TextView
-        android:id="@+id/labelEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/emailInscription"
-        android:layout_alignLeft="@+id/labelPseudo"
-        android:layout_marginBottom="27dp"
-        android:text="Email" />
-
-    <EditText
-        android:id="@+id/pseudoInscription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/labelEmail"
-        android:layout_alignRight="@+id/buttonInscription"
-        android:layout_marginBottom="24dp"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/labelPseudo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/labelPassword"
-        android:layout_below="@+id/labelInscription"
-        android:layout_marginTop="28dp"
-        android:text="Pseudo" />
 
     <EditText
         android:id="@+id/emailInscription"
@@ -75,23 +28,58 @@
         android:ems="10"
         android:inputType="textEmailAddress" />
 
+    <EditText
+        android:id="@+id/pseudoInscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/labelEmail"
+        android:layout_alignLeft="@+id/passwordInscription"
+        android:layout_marginBottom="15dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/labelPseudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pseudoInscription"
+        android:layout_alignLeft="@+id/labelPassword"
+        android:text="Pseudo" />
+
     <TextView
         android:id="@+id/errorInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:layout_toRightOf="@+id/labelEmail"
-        android:text="Pseudo ou login déjà utilisé"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/buttonInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/errorInscription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_alignLeft="@+id/errorInscription"
+        android:layout_marginBottom="25dp"
         android:text="Inscription" />
+
+    <TextView
+        android:id="@+id/labelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/emailInscription"
+        android:layout_alignLeft="@+id/labelPassword"
+        android:text="Email" />
+
+    <EditText
+        android:id="@+id/passwordInscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonInscription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:inputType="textPassword" />
 
 </RelativeLayout>

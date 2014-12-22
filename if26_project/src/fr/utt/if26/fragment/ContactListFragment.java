@@ -30,7 +30,6 @@ public class ContactListFragment extends Fragment {
 
 	private User user;
 	private Button addContactButton;
-	private ContactListFragment currentFragment;
 	private Context context;
 	private ListView listView;
 	
@@ -40,9 +39,7 @@ public class ContactListFragment extends Fragment {
         super.onAttach(activity);
         context = getActivity();
       }
-	
-	
-	
+		
 	
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -20,8 +20,8 @@ public class MessageListFragment extends ListFragment{
 		super.onActivityCreated(savedInstanceState);
 
 		user = (User) getActivity().getIntent().getSerializableExtra("user");
-		   
-        final List<String[]> history = user.getHistoryDescription();
+
+		final List<String[]> history = user.getHistoryDescription();
         setListAdapter(new ArrayAdapter<String[]>(
                 getActivity(),
                 android.R.layout.simple_list_item_2,
