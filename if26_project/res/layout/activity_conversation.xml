@@ -12,16 +12,7 @@
         android:layout_alignParentLeft="true"
         android:ems="10" >
 
-        <requestFocus />
     </EditText>
-
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Send" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -41,5 +32,22 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/message"
+        android:layout_toRightOf="@+id/message"
+        android:text="Send" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/send_button"
+        android:layout_toRightOf="@+id/send_button"
+        android:src="@android:drawable/ic_menu_rotate" />
 
 </RelativeLayout>
