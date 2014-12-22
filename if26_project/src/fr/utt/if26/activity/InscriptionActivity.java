@@ -1,13 +1,8 @@
 package fr.utt.if26.activity;
 
 import fr.utt.if26.R;
-import fr.utt.if26.R.id;
-import fr.utt.if26.R.layout;
-import fr.utt.if26.R.menu;
 import fr.utt.if26.model.User;
-import fr.utt.if26.service.business.ConnectionService;
 import fr.utt.if26.service.business.InscriptionService;
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;

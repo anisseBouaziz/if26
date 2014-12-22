@@ -15,6 +15,7 @@ public class User implements Serializable {
 
 	public User(String token) {
 		this.token = token;
+		contactList=new ArrayList<Contact>();
 	}
 
 	public String getToken() {

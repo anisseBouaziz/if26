@@ -49,12 +49,14 @@ public class AddContactService implements IAddFriendService {
 		try {
 			if (!result.getBoolean("error")) {
 				((AddContactActivity) currentActivity)
-				.displayErrorMessage("Friend Request send");
+				.hideErrorMessage();
+				new InfoDialogFragment("Internet connection unavailable").show(
+						currentActivity.getFragmentManager(),
+						"Friend request has been sent");
 				goToHomePageActivity();
 			}else{
 				((AddContactActivity) currentActivity)
 				.displayErrorMessage(result.getString("description"));
-				goToHomePageActivity();
 			}
 
 		} catch (JSONException e) {

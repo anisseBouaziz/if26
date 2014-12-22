@@ -27,9 +27,7 @@ public class InscriptionService implements IRegisterUserService {
 				currentActivity.getApplicationContext());
 	}
 
-	/**
-	 * Verify if the pseudo and the password are correct
-	 */
+	
 	public void connectUser(String pseudo, String email, String password) {
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
 			String urlRequest = WebService.SERVICE_URL
