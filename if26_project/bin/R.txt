@@ -280,7 +280,6 @@ int id homeAsUp 0x7f050005
 int id icon 0x7f05002a
 int id ifRoom 0x7f05000a
 int id image 0x7f050027
-int id imageButton1 0x7f050049
 int id inscription 0x7f050044
 int id labelEmail 0x7f05004f
 int id labelInscription 0x7f05004b
@@ -304,6 +303,7 @@ int id pseudoContactAdd 0x7f05003e
 int id pseudoInscription 0x7f050052
 int id radio 0x7f05002f
 int id realtabcontent 0x7f05004a
+int id refreshButton 0x7f050049
 int id scrollView1 0x7f050046
 int id search_badge 0x7f050032
 int id search_bar 0x7f050031

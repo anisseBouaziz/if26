@@ -1125,7 +1125,6 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageButton1=0x7f050049;
         public static final int inscription=0x7f050044;
         public static final int labelEmail=0x7f05004f;
         public static final int labelInscription=0x7f05004b;
@@ -1149,6 +1148,7 @@ containing a value of this type.
         public static final int pseudoInscription=0x7f050052;
         public static final int radio=0x7f05002f;
         public static final int realtabcontent=0x7f05004a;
+        public static final int refreshButton=0x7f050049;
         public static final int scrollView1=0x7f050046;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;

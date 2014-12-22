@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class ConversationActivity extends Activity {
 	private User user;
 	private EditText messageToSendEditText;
 	private Button sendButton;
+	private ImageButton refreshButton;
 	private ConversationService conversationService;
 
 	@Override
@@ -71,6 +73,7 @@ public class ConversationActivity extends Activity {
 	 * Display conversation
 	 */
 	public void displayConversation(List<Message> listMessagesToDisplay) {
+		
 		for (Message message : listMessagesToDisplay) {
 			displayMessageOnTheScreen(message);
 		}
@@ -79,14 +82,15 @@ public class ConversationActivity extends Activity {
 	public void refreshConversation(){
 		startActivity(getIntent());
 		finish();
+//		conversationService.retrieveConversation();
 	}
 
 	private void displayMessageOnTheScreen(Message message) {
 		String messageToDisplay;
+		
 		messageToDisplay = "<b>"
 				+ message.getState() + " the " + message.getStringDate()
 				+ ":</b><br>" + message.getStringMessage() + "<br>";
-		
 		View linearLayout =  findViewById(R.id.messageLayout);
 
 		TextView messageView = new TextView(this);
@@ -100,13 +104,28 @@ public class ConversationActivity extends Activity {
 	private void initializeListeners() {
 		messageToSendEditText = (EditText) findViewById(R.id.message);
 		sendButton = (Button) findViewById(R.id.send_button);
+		refreshButton = (ImageButton) findViewById(R.id.refreshButton);
 		
 		sendButton.setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
 				String stringMessage = messageToSendEditText.getText().toString();
-				conversationService.sendMessage(stringMessage);
+				if(!stringMessage.equals("")){
+					if(contactWithConversationToDisplay.getLastMessage() == null
+							|| !contactWithConversationToDisplay.getLastMessage().equals(stringMessage)){
+						conversationService.sendMessage(stringMessage);
+					}
+				}
+			}
+			
+		});
+		
+		refreshButton.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				refreshConversation();
 			}
 			
 		});
