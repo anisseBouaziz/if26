@@ -96,8 +96,8 @@ public class ConnectionService implements IConnectionService,
 	}
 
 	private void retrieveContactsFromServer() {
-		sqlHelper.getWritableDatabase().delete(MessengerDBContract.ContactTable.TABLE_NAME, null, null);
-		sqlHelper.getWritableDatabase().delete(MessengerDBContract.MessageTable.TABLE_NAME, null, null);
+//		sqlHelper.getWritableDatabase().delete(MessengerDBContract.ContactTable.TABLE_NAME, null, null);
+//		sqlHelper.getWritableDatabase().delete(MessengerDBContract.MessageTable.TABLE_NAME, null, null);
 		WebService webService = new WebServiceContacts(this);
 		String urlRequest = WebService.SERVICE_URL
 				+ "contacts.php?token=" + user.getToken(); //$NON-NLS-1$
@@ -135,6 +135,19 @@ public class ConnectionService implements IConnectionService,
 		Intent intent = new Intent(currentActivity, HomePageActivity.class);
 		intent.putExtra("user", user);
 		currentActivity.startActivity(intent);
+	}
+
+	public void logOffUser() {
+		emptyLocalDataBase();
+		Intent intent = new Intent(currentActivity, ConnectionActivity.class);
+		currentActivity.startActivity(intent);
+		currentActivity.finish();
+	}
+
+	private void emptyLocalDataBase() {
+		sqlHelper.getWritableDatabase().delete(MessengerDBContract.ContactTable.TABLE_NAME, null, null);
+		sqlHelper.getWritableDatabase().delete(MessengerDBContract.MessageTable.TABLE_NAME, null, null);
+		sqlHelper.getWritableDatabase().delete(MessengerDBContract.UserTable.TABLE_NAME, null, null);
 	}
 
 }

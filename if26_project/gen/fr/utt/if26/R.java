@@ -1633,8 +1633,9 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020031;
         public static final int abc_textfield_search_material=0x7f020032;
         public static final int drawer_shadow=0x7f020033;
-        public static final int ic_drawer=0x7f020034;
-        public static final int ic_launcher=0x7f020035;
+        public static final int ic_deco=0x7f020034;
+        public static final int ic_drawer=0x7f020035;
+        public static final int ic_launcher=0x7f020036;
     }
     public static final class id {
         public static final int AddContactLabel=0x7f05003f;
@@ -1664,6 +1665,7 @@ containing a value of this type.
         public static final int collapseActionView=0x7f05000f;
         public static final int connection=0x7f050044;
         public static final int container=0x7f050056;
+        public static final int deconnection_action=0x7f05005d;
         public static final int decor_content_parent=0x7f05002f;
         public static final int default_activity_button=0x7f050024;
         public static final int dialog=0x7f050010;
@@ -1797,8 +1799,9 @@ containing a value of this type.
         public static final int conversation=0x7f0c0004;
         public static final int conversation_activity2=0x7f0c0005;
         public static final int global=0x7f0c0006;
-        public static final int inscription=0x7f0c0007;
-        public static final int main=0x7f0c0008;
+        public static final int home_page_deco_action=0x7f0c0007;
+        public static final int inscription=0x7f0c0008;
+        public static final int main=0x7f0c0009;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
