@@ -16,7 +16,7 @@ import fr.utt.if26.service.business.AddContactService;
 public class AddContactActivity extends Activity {
 
 	private EditText pseudoAddContact;
-	private TextView errorMessage;
+	private TextView infoMessage;
 	private Button addUserButton;
 	private AddContactService addService;
 	private AddContactActivity currentActivity;
@@ -29,8 +29,8 @@ public class AddContactActivity extends Activity {
 		setContentView(R.layout.activity_add_contact);
 		
 		pseudoAddContact = (EditText) findViewById(R.id.pseudoContactAdd);
-		errorMessage = (TextView) findViewById(R.id.errorMessageAdd);
-		errorMessage.setVisibility(View.GONE);
+		infoMessage = (TextView) findViewById(R.id.errorMessageAdd);
+		infoMessage.setVisibility(View.GONE);
 		addUserButton = (Button) findViewById(R.id.addButton);
 		
 		user = (User) getIntent().getSerializableExtra("user");
@@ -45,10 +45,10 @@ public class AddContactActivity extends Activity {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				if (currentActivity.verificationEmptyField()){
-					displayErrorMessage("Please enter a pseudo");
+					displayInfoMessage("Please enter a pseudo");
 				}
 				else if(user.getContactFromPseudo(pseudo_string)!=null){
-					displayErrorMessage("This user is already in your contacts");
+					displayInfoMessage("This user is already in your contacts");
 				}
 				else{
 					addService.findContact(pseudo_string);
@@ -89,13 +89,13 @@ public class AddContactActivity extends Activity {
 		return emptyField;
 	}
 	
-	public void displayErrorMessage(String text){
-		errorMessage.setText(text);
-		errorMessage.setVisibility(View.VISIBLE);
+	public void displayInfoMessage(String text){
+		infoMessage.setText(text);
+		infoMessage.setVisibility(View.VISIBLE);
 	}
 	
-	public void hideErrorMessage(){
-		errorMessage.setVisibility(View.GONE);
+	public void hideInfoMessage(){
+		infoMessage.setVisibility(View.GONE);
 	}
 	
 	
