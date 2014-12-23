@@ -38,6 +38,8 @@ public class ConversationActivity extends Activity {
 		contactWithConversationToDisplay = (Contact) getIntent()
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
+		getActionBar().setTitle("Conversation with "+contactWithConversationToDisplay.getPseudo());
+
 		conversationService=new ConversationService(this,user,contactWithConversationToDisplay);
 		conversationService.retrieveConversation();
 		initializeListeners();

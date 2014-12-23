@@ -35,6 +35,7 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setTitle("Identification page");
 		setContentView(R.layout.activity_connection);
 		email = (EditText) this.findViewById(R.id.email);
 		password = (EditText) this.findViewById(R.id.password);

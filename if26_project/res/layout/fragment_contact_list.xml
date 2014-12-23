@@ -30,7 +30,7 @@
         android1:layout_alignParentBottom="true"
         android1:layout_alignParentLeft="true"
         android1:onClick="addContactClick"
-        android1:text="Add new contact" />
+        android1:text="New contact" />
 
     <Button
         android1:id="@+id/buttonDeleteContact"

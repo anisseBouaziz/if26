@@ -20,12 +20,12 @@ public class InscriptionActivity extends Activity {
 	private TextView errorInscription;
 	private InscriptionService inscriptionService;
 	private InscriptionActivity currentActivity;
-	private User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_inscription);
+		getActionBar().setTitle("Inscription page");
 		pseudoInscription = (EditText) this.findViewById(R.id.pseudoInscription);
 		emailInscription = (EditText) this.findViewById(R.id.emailInscription);
 		passwordInscription = (EditText) this.findViewById(R.id.passwordInscription);
@@ -46,6 +46,10 @@ public class InscriptionActivity extends Activity {
 				
 				if (currentActivity.verificationEmptyField()){
 					currentActivity.displayIncorrectInscriptionErrorMessage("One of the filed is empty");
+				}
+				else if(password_string.length()<6){
+					displayIncorrectInscriptionErrorMessage("Please enter a password with at least 6 characters");
+
 				}
 				else{
 					inscriptionService.connectUser(pseudo_string, email_string, password_string);

@@ -24,6 +24,7 @@ public class AddContactActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		getActionBar().hide();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_contact);
 		

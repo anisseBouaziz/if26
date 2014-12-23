@@ -7,8 +7,6 @@ import fr.utt.if26.R;
 import fr.utt.if26.fragment.ContactListFragment;
 import fr.utt.if26.fragment.MessageListFragment;
 import fr.utt.if26.fragment.NotificationsFragment;
-import fr.utt.if26.model.User;
-import fr.utt.if26.service.business.ConnectionService;
 
 public class HomePageActivity extends FragmentActivity {
 
@@ -23,6 +21,7 @@ public class HomePageActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		setContentView(R.layout.activity_home_page);
+		setTitle("Welcome to MessenUTT");
 		 FragmentTabHost tabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 	        tabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
@@ -32,6 +31,7 @@ public class HomePageActivity extends FragmentActivity {
 	        		ContactListFragment.class, null);
 	        tabHost.addTab(tabHost.newTabSpec("notifications").setIndicator("Notifications"),
 	        		NotificationsFragment.class, null);
+	       
 		super.onCreate(arg0);
 	}
 
