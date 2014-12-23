@@ -1,19 +1,12 @@
 package fr.utt.if26.service.business;
 
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Intent;
 import fr.utt.if26.activity.AddContactActivity;
-import fr.utt.if26.activity.HomePageActivity;
 import fr.utt.if26.fragment.InfoDialogFragment;
-import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
-import fr.utt.if26.parser.ContactParser;
-import fr.utt.if26.persistence.MessengerDBHelper;
 import fr.utt.if26.service.IAddFriendService;
 import fr.utt.if26.service.web.WebService;
 import fr.utt.if26.service.web.WebServiceAddFriend;
