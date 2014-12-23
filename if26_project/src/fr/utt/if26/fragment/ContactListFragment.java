@@ -18,6 +18,7 @@ import android.widget.ListView;
 import fr.utt.if26.R;
 import fr.utt.if26.activity.AddContactActivity;
 import fr.utt.if26.activity.ConversationActivity;
+import fr.utt.if26.activity.DeleteContactActivity;
 import fr.utt.if26.activity.FriendRequestActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
@@ -34,6 +35,7 @@ public class ContactListFragment extends Fragment {
 	private Button friendRequestButton;
 	private Context context;
 	private ListView listView;
+	private Button deleteContactButton;
 	
 	
 	
@@ -49,6 +51,7 @@ public class ContactListFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
 		addContactButton = (Button) view.findViewById(R.id.buttonAddContact);
 		friendRequestButton = (Button) view.findViewById(R.id.buttonFriendRequest);
+		deleteContactButton = (Button) view.findViewById(R.id.buttonDeleteContact);
 		listView = (ListView) view.findViewById(R.id.listView1);
 		
 		
@@ -72,7 +75,7 @@ public class ContactListFragment extends Fragment {
 			    View view, 
 			    int position,
 			    long id) {
-				  String pseudo = (String) adapterView.getItemAtPosition(position);
+				  	String pseudo = (String) adapterView.getItemAtPosition(position);
 					Contact contactWithConversationToDisplay = user
 							.getContactFromPseudo(pseudo);
 					Intent intent = new Intent(context, ConversationActivity.class);
@@ -96,6 +99,15 @@ public class ContactListFragment extends Fragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), FriendRequestActivity.class);
+				intent.putExtra("user",user);
+				startActivity(intent);
+			}
+		});
+		
+		deleteContactButton.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), DeleteContactActivity.class);
 				intent.putExtra("user",user);
 				startActivity(intent);
 			}

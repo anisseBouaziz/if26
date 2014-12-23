@@ -5,5 +5,7 @@ import org.json.JSONObject;
 public interface IManageFriendRequestService {
 
 	public void displayFriendRequestsList(JSONObject result);
+
+	public void postAcceptingRequest(JSONObject result);
 	
 }

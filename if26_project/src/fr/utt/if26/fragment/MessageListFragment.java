@@ -2,13 +2,17 @@ package fr.utt.if26.fragment;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import fr.utt.if26.activity.ConversationActivity;
+import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 import fr.utt.if26.persistence.MessengerDBHelper;
 
@@ -39,12 +43,25 @@ public class MessageListFragment extends ListFragment{
                     text2.setText(entry[1]);
                     return view;
                 }
-            });
-        
-		
-		
+            });	
 	}
 	
+	
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		String[] items = (String[]) l.getItemAtPosition(position);
+		Contact contactWithConversationToDisplay = user
+				.getContactFromPseudo(items[0]);
+		Intent intent = new Intent(getActivity(), ConversationActivity.class);
+		intent.putExtra("contact", contactWithConversationToDisplay);
+		intent.putExtra("user", user);
+		startActivity(intent);
+		super.onListItemClick(l, v, position, id);
+	}
+
+
+
 	@Override
 	public void onResume() {
 		user.setContactList(new MessengerDBHelper(getActivity()).retrieveContactsInDB());

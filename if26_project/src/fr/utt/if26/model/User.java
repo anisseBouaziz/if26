@@ -78,4 +78,13 @@ public class User implements Serializable {
 		return history;
 	}
 
+	public void removeContact(String pseudo) {
+		for (Contact contact : contactList) {
+			if(contact.getPseudo().equals(pseudo)){
+				contactList.remove(contact);
+			}
+		}
+		
+	}
+
 }

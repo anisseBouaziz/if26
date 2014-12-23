@@ -91,27 +91,31 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 	}
 
 	public void persistOrUpdateContacts(List<Contact> contactList) {
-		SQLiteDatabase db = this.getWritableDatabase();
 
 		for (Contact contact : contactList) {
-			ContentValues values = new ContentValues();
-			values.put(MessengerDBContract.ContactTable.COLUMN_NAME_PSEUDO,
-					contact.getPseudo());
-			if (isContactExisting(contact.getId())) {
-				db.update(
-						MessengerDBContract.ContactTable.TABLE_NAME,
-						values,
-						MessengerDBContract.COLUMN_NAME_ID + "="
-								+ contact.getId(), null);
-			} else {
-				values.put(MessengerDBContract.COLUMN_NAME_ID, contact.getId());
-				db.insert(MessengerDBContract.ContactTable.TABLE_NAME, null,
-						values);
-				if(contact.getLastMessage() !=null){
-					persistMessage(contact.getLastMessage(), contact.getId());
-				}
-			}
+			persistOrUpdateContact(contact);
 
+		}
+	}
+
+	public void persistOrUpdateContact(Contact contact) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(MessengerDBContract.ContactTable.COLUMN_NAME_PSEUDO,
+				contact.getPseudo());
+		if (isContactExisting(contact.getId())) {
+			db.update(
+					MessengerDBContract.ContactTable.TABLE_NAME,
+					values,
+					MessengerDBContract.COLUMN_NAME_ID + "="
+							+ contact.getId(), null);
+		} else {
+			values.put(MessengerDBContract.COLUMN_NAME_ID, contact.getId());
+			db.insert(MessengerDBContract.ContactTable.TABLE_NAME, null,
+					values);
+			if(contact.getLastMessage() !=null){
+				persistMessage(contact.getLastMessage(), contact.getId());
+			}
 		}
 	}
 
@@ -196,6 +200,12 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 	}
 
 
+	public void deleteContact(Contact contactToDelete) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(MessengerDBContract.ContactTable.TABLE_NAME, MessengerDBContract.COLUMN_NAME_ID+" = ?"
+				, new String[] { String.valueOf(contactToDelete.getId()) });		
+	}
+	
 	private boolean isContactExisting(int contact_id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "

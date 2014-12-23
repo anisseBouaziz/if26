@@ -8,32 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fr.utt.if26.activity.FriendRequestActivity" >
 
-    <TextView
-        android:id="@+id/tokenView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ListView
         android:id="@+id/listViewFriendRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tokenView"
-        android:layout_marginTop="32dp" >
+        android:layout_above="@+id/acceptRequest"
+        android:layout_alignParentTop="true" >
 
     </ListView>
-
-    <Button
-        android:id="@+id/acceptRequest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/tokenView"
-        android:text="Accept" />
 
     <Button
         android:id="@+id/refuseRequest"
@@ -43,5 +25,15 @@
         android:layout_alignRight="@+id/listViewFriendRequest"
         android:layout_marginRight="31dp"
         android:text="Refuse" />
+
+    <Button
+        android:id="@+id/acceptRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/refuseRequest"
+        android:layout_alignBottom="@+id/refuseRequest"
+        android:layout_marginRight="42dp"
+        android:layout_toLeftOf="@+id/refuseRequest"
+        android:text="Accept" />
 
 </RelativeLayout>

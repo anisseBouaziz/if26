@@ -62,7 +62,7 @@
             android:label="@string/title_activity_conversation" >
         </activity>
         <activity
-            android:name=".DeleteContactActivity"
+            android:name="fr.utt.if26.activity.DeleteContactActivity"
             android:label="@string/title_activity_delete_contact" >
         </activity>
         <activity
@@ -70,11 +70,11 @@
             android:label="@string/title_activity_inscription" >
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.AddContactActivity"
+            android:name=".activity.AddContactActivity"
             android:label="@string/title_activity_add_contact" >
         </activity>
         <activity
-            android:name="fr.utt.if26.activity.FriendRequestActivity"
+            android:name=".activity.FriendRequestActivity"
             android:label="@string/title_activity_friend_request" >
         </activity>
     </application>
