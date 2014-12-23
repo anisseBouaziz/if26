@@ -63,23 +63,23 @@
         android:ems="10"
         android:inputType="textPassword" />
 
+    <Button
+        android:id="@+id/buttonInscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp"
+        android:layout_toRightOf="@+id/labelPseudo"
+        android:text="Inscription" />
+
     <TextView
         android:id="@+id/errorInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:text="Medium Text"
+        android:layout_marginTop="34dp"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/buttonInscription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:layout_toRightOf="@+id/labelPseudo"
-        android:text="Inscription" />
 
 </RelativeLayout>

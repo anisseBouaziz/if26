@@ -45,7 +45,7 @@ public class InscriptionActivity extends Activity {
 				String password_string = passwordInscription.getText().toString();
 				
 				if (currentActivity.verificationEmptyField()){
-					currentActivity.displayIncorrectInscriptionErrorMessage("One of the filed is empty");
+					currentActivity.displayIncorrectInscriptionErrorMessage("One of the field is empty");
 				}
 				else if(password_string.length()<6){
 					displayIncorrectInscriptionErrorMessage("Please enter a password with at least 6 characters");
