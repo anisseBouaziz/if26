@@ -19,7 +19,6 @@ import fr.utt.if26.R;
 import fr.utt.if26.activity.AddContactActivity;
 import fr.utt.if26.activity.ConversationActivity;
 import fr.utt.if26.activity.FriendRequestActivity;
-import fr.utt.if26.activity.HomePageActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
 import fr.utt.if26.persistence.MessengerDBHelper;
@@ -48,16 +47,6 @@ public class ContactListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
-//		Button deleteButton = (Button) getActivity().findViewById(R.id.button_delete_contact);
-//		View.OnClickListener buttonListener = new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				
-//			}
-//		};
-//		deleteButton.setOnClickListener(buttonListener);
-
 		addContactButton = (Button) view.findViewById(R.id.buttonAddContact);
 		friendRequestButton = (Button) view.findViewById(R.id.buttonFriendRequest);
 		listView = (ListView) view.findViewById(R.id.listView1);
@@ -136,23 +125,4 @@ public class ContactListFragment extends Fragment {
 	}
 
 
-
-
-
-
-
-//	/**
-//	 * When the user click on a specific contact then we show him all the conversation he has with this contact
-//	 */
-//	@Override
-//	public void onListItemClick(ListView l, View v, int position, long id) {
-//		super.onListItemClick(l, v, position, id);
-//		String completeName = (String) l.getItemAtPosition(position);
-//		Contact contactWithConversationToDisplay = user
-//				.getContactFromCompleteName(completeName);
-//		Intent intent = new Intent(getActivity(), ConversationActivityX.class);
-//		intent.putExtra("contact", contactWithConversationToDisplay);
-//		intent.putExtra("user", user);
-//		startActivity(intent);
-//	}
 }

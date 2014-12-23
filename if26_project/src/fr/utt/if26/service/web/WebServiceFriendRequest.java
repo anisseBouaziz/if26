@@ -2,7 +2,7 @@ package fr.utt.if26.service.web;
 
 import org.json.JSONObject;
 
-import fr.utt.if26.service.IFriendRequestService;
+import fr.utt.if26.service.IManageFriendRequestService;
 
 public class WebServiceFriendRequest extends WebService {
 	
@@ -11,7 +11,7 @@ public class WebServiceFriendRequest extends WebService {
 	}
 
 	protected void onPostExecute(JSONObject result) {
-		((IFriendRequestService) callerService).getListFriendRequest(result);
+		((IManageFriendRequestService) callerService).displayFriendRequestsList(result);
 		super.onPostExecute(result);
 	}
 

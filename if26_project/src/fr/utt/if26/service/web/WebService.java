@@ -14,10 +14,10 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
-public abstract class WebService extends AsyncTask<String, Integer, JSONObject> {
+public class WebService extends AsyncTask<String, Integer, JSONObject> {
 
 	protected Object callerService;
-	public static final String SERVICE_URL = "http://192.168.0.20/messenger/";
+	public static final String SERVICE_URL = "http://192.168.1.4/messenger/";
 
 	public WebService(Object callerService) {
 		this.callerService = callerService;
