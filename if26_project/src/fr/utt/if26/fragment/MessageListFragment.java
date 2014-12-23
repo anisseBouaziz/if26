@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import fr.utt.if26.model.User;
+import fr.utt.if26.persistence.MessengerDBHelper;
 
 public class MessageListFragment extends ListFragment{
 
@@ -42,6 +43,12 @@ public class MessageListFragment extends ListFragment{
         
 		
 		
+	}
+	
+	@Override
+	public void onResume() {
+		user.setContactList(new MessengerDBHelper(getActivity()).retrieveContactsInDB());
+		super.onResume();
 	}
 
 

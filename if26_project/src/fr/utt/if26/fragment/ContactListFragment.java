@@ -21,6 +21,7 @@ import fr.utt.if26.activity.ConversationActivity;
 import fr.utt.if26.activity.HomePageActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
+import fr.utt.if26.persistence.MessengerDBHelper;
 
 /**
  * Activity responsible to display the contact list of the connected user
@@ -112,6 +113,14 @@ public class ContactListFragment extends Fragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+
+
+	@Override
+	public void onResume() {
+		user.setContactList(new MessengerDBHelper(context).retrieveContactsInDB());
+		super.onResume();
 	}
 
 

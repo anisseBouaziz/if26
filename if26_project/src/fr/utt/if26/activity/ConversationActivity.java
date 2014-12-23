@@ -1,9 +1,6 @@
 package fr.utt.if26.activity;
 
-import java.net.URLEncoder;
 import java.util.List;
-
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,7 +18,6 @@ import fr.utt.if26.R;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.Message;
 import fr.utt.if26.model.User;
-import fr.utt.if26.parser.ConversationParser;
 import fr.utt.if26.service.business.ConversationService;
 
 public class ConversationActivity extends Activity {
