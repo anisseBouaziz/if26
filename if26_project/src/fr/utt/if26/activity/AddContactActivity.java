@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,9 +41,10 @@ public class AddContactActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				String pseudo_string = pseudoAddContact.getText().toString();
-
+				InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				if (currentActivity.verificationEmptyField()){
-					currentActivity.displayErrorMessage("User not find, try another pseudo");
+					currentActivity.displayErrorMessage("Please enter a pseudo");
 				}
 				else{
 					addService.findContact(pseudo_string);
