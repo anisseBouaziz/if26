@@ -45,7 +45,10 @@ public class AddContactActivity extends Activity {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				if (currentActivity.verificationEmptyField()){
-					currentActivity.displayErrorMessage("Please enter a pseudo");
+					displayErrorMessage("Please enter a pseudo");
+				}
+				else if(user.getContactFromPseudo(pseudo_string)!=null){
+					displayErrorMessage("This user is already in your contacts");
 				}
 				else{
 					addService.findContact(pseudo_string);
@@ -78,7 +81,7 @@ public class AddContactActivity extends Activity {
 	
 	
 	
-	public Boolean verificationEmptyField(){
+	public boolean verificationEmptyField(){
 		Boolean emptyField = false;
 		if(this.pseudoAddContact.getText().length() == 0){
 			emptyField = true;
