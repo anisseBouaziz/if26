@@ -18,6 +18,7 @@ import android.widget.ListView;
 import fr.utt.if26.R;
 import fr.utt.if26.activity.AddContactActivity;
 import fr.utt.if26.activity.ConversationActivity;
+import fr.utt.if26.activity.FriendRequestActivity;
 import fr.utt.if26.activity.HomePageActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
@@ -31,6 +32,7 @@ public class ContactListFragment extends Fragment {
 
 	private User user;
 	private Button addContactButton;
+	private Button friendRequestButton;
 	private Context context;
 	private ListView listView;
 	
@@ -57,6 +59,7 @@ public class ContactListFragment extends Fragment {
 //		deleteButton.setOnClickListener(buttonListener);
 
 		addContactButton = (Button) view.findViewById(R.id.buttonAddContact);
+		friendRequestButton = (Button) view.findViewById(R.id.buttonFriendRequest);
 		listView = (ListView) view.findViewById(R.id.listView1);
 		
 		
@@ -95,6 +98,15 @@ public class ContactListFragment extends Fragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), AddContactActivity.class);
+				intent.putExtra("user",user);
+				startActivity(intent);
+			}
+		});
+		
+		friendRequestButton.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), FriendRequestActivity.class);
 				intent.putExtra("user",user);
 				startActivity(intent);
 			}

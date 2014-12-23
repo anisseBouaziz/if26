@@ -20,5 +20,6 @@
     <string name="title_activity_conversation_activity2">ConversationActivity2</string>
     <string name="title_activity_delete_contact">DeleteContactActivity</string>
     <string name="title_activity_inscription">InscriptionActivity</string>
+    <string name="title_activity_friend_request">FriendRequestActivity</string>
 
 </resources>

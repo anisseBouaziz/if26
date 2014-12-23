@@ -73,6 +73,10 @@
             android:name="fr.utt.if26.activity.AddContactActivity"
             android:label="@string/title_activity_add_contact" >
         </activity>
+        <activity
+            android:name="fr.utt.if26.activity.FriendRequestActivity"
+            android:label="@string/title_activity_friend_request" >
+        </activity>
     </application>
 
 </manifest>
