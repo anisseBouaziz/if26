@@ -22,13 +22,13 @@ import fr.utt.if26.activity.DeleteContactActivity;
 import fr.utt.if26.activity.FriendRequestActivity;
 import fr.utt.if26.model.Contact;
 import fr.utt.if26.model.User;
-import fr.utt.if26.persistence.MessengerDBHelper;
+import fr.utt.if26.service.business.ConnectionService;
 
 /**
  * Activity responsible to display the contact list of the connected user
  *
  */
-public class ContactListFragment extends Fragment {
+public class ContactListFragment extends Fragment implements IDisplayUserInformartionsFragment{
 
 	private User user;
 	private Button addContactButton;
@@ -65,10 +65,8 @@ public class ContactListFragment extends Fragment {
 		user = (User) getActivity().getIntent().getSerializableExtra("user");
 		
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1,
-				user.getStringContactList());
-		listView.setAdapter(adapter);
+		configureContactList();
+		
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			  @Override
 			  public void onItemClick(AdapterView<?> adapterView, 
@@ -76,15 +74,18 @@ public class ContactListFragment extends Fragment {
 			    int position,
 			    long id) {
 				  	String pseudo = (String) adapterView.getItemAtPosition(position);
-					Contact contactWithConversationToDisplay = user
-							.getContactFromPseudo(pseudo);
-					Intent intent = new Intent(context, ConversationActivity.class);
-					intent.putExtra("contact", contactWithConversationToDisplay);
-					intent.putExtra("user", user);
-					startActivity(intent);
+					displayConversationWithSelectedContact(pseudo);
 			  }
+
+			public void displayConversationWithSelectedContact(String pseudo) {
+				Contact contactWithConversationToDisplay = user
+						.getContactFromPseudo(pseudo);
+				Intent intent = new Intent(context, ConversationActivity.class);
+				intent.putExtra("contact", contactWithConversationToDisplay);
+				intent.putExtra("user", user);
+				startActivity(intent);
+			}
 			});
-		
 		
 		addContactButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
@@ -117,6 +118,16 @@ public class ContactListFragment extends Fragment {
 
 
 
+	public void configureContactList() {
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1,
+				user.getStringContactList());
+		listView.setAdapter(adapter);
+		
+	}
+
+
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -132,9 +143,18 @@ public class ContactListFragment extends Fragment {
 
 	@Override
 	public void onResume() {
-		user.setContactList(new MessengerDBHelper(context).retrieveContactsInDB());
+		ConnectionService service = new ConnectionService(getActivity(), user);
+		service.refreshUserInformations(this);
 		super.onResume();
 	}
+
+
+
+	@Override
+	public void refreshUserInformations(User user) {
+		this.user=user;
+		configureContactList();
+		}
 
 
 }

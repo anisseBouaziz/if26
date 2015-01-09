@@ -29,6 +29,7 @@ public class ConversationActivity extends Activity {
 	private Button sendButton;
 	private ImageButton refreshButton;
 	private ConversationService conversationService;
+	private LinearLayout linearLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class ConversationActivity extends Activity {
 				.getSerializableExtra("contact");
 		user = (User) getIntent().getSerializableExtra("user");
 		getActionBar().setTitle("Conversation with "+contactWithConversationToDisplay.getPseudo());
-		
+		linearLayout =  (LinearLayout) findViewById(R.id.messageLayout);
+
 		conversationService=new ConversationService(this,user,contactWithConversationToDisplay);
 		conversationService.retrieveConversation();
 		initializeListeners();
@@ -71,16 +73,16 @@ public class ConversationActivity extends Activity {
 	 * Display conversation
 	 */
 	public void displayConversation(List<Message> listMessagesToDisplay) {
-		
 		for (Message message : listMessagesToDisplay) {
 			displayMessageOnTheScreen(message);
 		}
 	}
 	
 	public void refreshConversation(){
-		startActivity(getIntent());
-		finish();
-//		conversationService.retrieveConversation();
+//		startActivity(getIntent());
+//		finish();
+		linearLayout.removeAllViews();
+		conversationService.retrieveConversation();
 	}
 
 	private void displayMessageOnTheScreen(Message message) {
@@ -89,8 +91,7 @@ public class ConversationActivity extends Activity {
 		messageToDisplay = "<b>"
 				+ message.getState() + " the " + message.getStringDate()
 				+ ":</b><br>" + message.getStringMessage() + "<br>";
-		View linearLayout =  findViewById(R.id.messageLayout);
-
+		
 		TextView messageView = new TextView(this);
 		messageView.setText(Html.fromHtml(messageToDisplay));
 		messageView.setId(message.getId());
@@ -111,7 +112,7 @@ public class ConversationActivity extends Activity {
 				String stringMessage = messageToSendEditText.getText().toString();
 				if(!stringMessage.equals("")){
 					if(contactWithConversationToDisplay.getLastMessage() == null
-							|| !contactWithConversationToDisplay.getLastMessage().equals(stringMessage)){
+							|| !contactWithConversationToDisplay.getLastMessage().getStringMessage().equals(stringMessage)){
 						conversationService.sendMessage(stringMessage);
 					}
 				}

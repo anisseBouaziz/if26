@@ -36,7 +36,6 @@ public class HomePageActivity extends FragmentActivity {
 	        		ContactListFragment.class, null);
 	        tabHost.addTab(tabHost.newTabSpec("notifications").setIndicator("Notifications"),
 	        		NotificationsFragment.class, null);
-	       
 		super.onCreate(arg0);
 	}
 

@@ -156,7 +156,7 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 				+ MessengerDBContract.MessageTable.TABLE_NAME + " WHERE "
 				+ MessengerDBContract.MessageTable.COLUMN_NAME_CONTACT_ID + " = "
 				+ contactId + " ORDER BY "
-				+ MessengerDBContract.MessageTable.COLUMN_NAME_DATE + " DESC";
+				+ MessengerDBContract.MessageTable.COLUMN_NAME_DATE + " ASC";
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		boolean isMessageStored = c.moveToFirst();
@@ -184,10 +184,10 @@ public class MessengerDBHelper extends SQLiteOpenHelper {
 
 		int sent = c
 				.getInt(c
-						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_DATE));
+						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_SENT));
 		int id = c
 				.getInt(c
-						.getColumnIndex(MessengerDBContract.MessageTable.COLUMN_NAME_DATE));
+						.getColumnIndex(MessengerDBContract.COLUMN_NAME_ID));
 		
 		Message message;
 

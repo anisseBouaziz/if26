@@ -11,4 +11,6 @@ import fr.utt.if26.service.web.WebServiceContacts;
 public interface IRetrieveContactsService {
 
 	public void retrieveContacts(JSONObject result);
+
+	public void refreshContacts(JSONObject result);
 }

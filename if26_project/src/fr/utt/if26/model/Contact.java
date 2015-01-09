@@ -29,11 +29,16 @@ public class Contact implements Serializable, Comparable<Contact> {
 
 	@Override
 	public int compareTo(Contact another) {
-		return lastMessage.getStringDate().compareTo(another.getLastMessage().getStringDate());
+		return lastMessage.getStringDate().compareTo(
+				another.getLastMessage().getStringDate());
 	}
 
 	public Message getLastMessage() {
 		return lastMessage;
+	}
+
+	public void setLastMessage(Message message) {
+		this.lastMessage = message;
 	}
 
 }

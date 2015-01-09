@@ -3,6 +3,7 @@ package fr.utt.if26.service.business;
 import java.net.URLEncoder;
 import java.util.List;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import fr.utt.if26.activity.ConversationActivity;
@@ -79,6 +80,15 @@ public class ConversationService implements IRetrieveMessageListService, ISendMe
 
 	@Override
 	public void postSendingMessageTreatment(JSONObject result) {
+		try {
+			Message message = ConversationParser
+					.instanciateMessage(result.getJSONObject("message"));
+			contact.setLastMessage(message);
+			sqlHelper.persistMessage(message, contact.getId());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		callerActivity.refreshConversation();
 	}
 

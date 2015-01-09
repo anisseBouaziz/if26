@@ -21,6 +21,7 @@ public class AddContactActivity extends Activity {
 	private AddContactService addService;
 	private AddContactActivity currentActivity;
 	private User user;
+	private Button searchPossibleContactInRadius;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class AddContactActivity extends Activity {
 		infoMessage = (TextView) findViewById(R.id.errorMessageAdd);
 		infoMessage.setVisibility(View.GONE);
 		addUserButton = (Button) findViewById(R.id.addButton);
+		searchPossibleContactInRadius = (Button) findViewById(R.id.findContactInRadius);
+
 		
 		user = (User) getIntent().getSerializableExtra("user");
 		addService = new AddContactService(this,user);
@@ -56,6 +59,15 @@ public class AddContactActivity extends Activity {
 			}
 		};
 		addUserButton.setOnClickListener(buttonListener);
+		
+		View.OnClickListener buttonListener2 = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				addService.findPossibleContactsInArea();
+			}
+		};
+		searchPossibleContactInRadius.setOnClickListener(buttonListener2);
 		
 		
 	}

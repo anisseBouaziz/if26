@@ -1,5 +1,7 @@
 package fr.utt.if26.service.business;
 
+import java.net.URLEncoder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,9 +32,10 @@ public class InscriptionService implements IRegisterUserService {
 	
 	public void connectUser(String pseudo, String email, String password) {
 		if (InternetConnectionVerificator.isNetworkAvailable(currentActivity)) {
+			String encodedPassword = URLEncoder.encode(password);
 			String urlRequest = WebService.SERVICE_URL
 					+ "inscription.php?pseudo=" + pseudo + "&email=" + email
-					+ "&password=" + password;
+					+ "&password=" + encodedPassword;
 			WebService webService = new WebServiceInscription(this);
 			webService.execute(urlRequest);
 		} else {

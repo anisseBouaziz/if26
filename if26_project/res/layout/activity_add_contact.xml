@@ -47,4 +47,13 @@
         android:layout_toRightOf="@+id/pseudoContactAdd"
         android:text="Add" />
 
+    <Button
+        android:id="@+id/findContactInRadius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp"
+        android:text="Find possible contacts around me" />
+
 </RelativeLayout>

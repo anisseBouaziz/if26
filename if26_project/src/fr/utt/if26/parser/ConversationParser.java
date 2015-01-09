@@ -33,7 +33,7 @@ public class ConversationParser {
 		return messageList;
 	}
 
-	private static Message instanciateMessage(JSONObject jsonMessage)
+	public static Message instanciateMessage(JSONObject jsonMessage)
 			throws JSONException {
 		String stringMessage = jsonMessage.getString("message");
 		String date = jsonMessage.getString("date");

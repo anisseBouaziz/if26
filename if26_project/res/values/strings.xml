@@ -21,5 +21,6 @@
     <string name="title_activity_delete_contact">DeleteContactActivity</string>
     <string name="title_activity_inscription">InscriptionActivity</string>
     <string name="title_activity_friend_request">FriendRequestActivity</string>
+    <string name="title_activity_possible_contact_around">PossibleContactAroundActivity</string>
 
 </resources>

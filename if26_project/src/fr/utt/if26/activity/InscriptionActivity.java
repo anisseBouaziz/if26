@@ -1,8 +1,7 @@
 package fr.utt.if26.activity;
 
-import fr.utt.if26.R;
-import fr.utt.if26.model.User;
-import fr.utt.if26.service.business.InscriptionService;
+import java.util.regex.Pattern;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import fr.utt.if26.R;
+import fr.utt.if26.service.business.InscriptionService;
 
 public class InscriptionActivity extends Activity {
 
@@ -49,7 +50,9 @@ public class InscriptionActivity extends Activity {
 				}
 				else if(password_string.length()<6){
 					displayIncorrectInscriptionErrorMessage("Please enter a password with at least 6 characters");
-
+				}
+				else if(!Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$", email_string)){
+					displayIncorrectInscriptionErrorMessage("Please enter a valid email");
 				}
 				else{
 					inscriptionService.connectUser(pseudo_string, email_string, password_string);

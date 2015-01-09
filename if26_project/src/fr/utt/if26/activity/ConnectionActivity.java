@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ConnectionActivity extends Activity implements IRetrieveContactsService{
+public class ConnectionActivity extends Activity{
 
 	private EditText email;
 	private EditText password;
@@ -105,26 +105,7 @@ public class ConnectionActivity extends Activity implements IRetrieveContactsSer
 		errorMessage.setVisibility(View.GONE);
 	}
 	
-	/**
-	 * Get all the contacts of the connected user
-	 */
-	@Override
-	public void retrieveContacts(JSONObject result) {
-		try {
-			if (!result.getBoolean("error")) { //$NON-NLS-1$
-				List<Contact> contactList = ContactParser
-						.jsonToListContact(result);
-				user.setContactList(contactList);
-				Intent intent = new Intent(this, HomePageActivity.class);
-				intent.putExtra("user", user); //$NON-NLS-1$
-				startActivity(intent);
-			}
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 
 	
 
